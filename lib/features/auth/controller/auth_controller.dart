@@ -39,7 +39,7 @@ class AuthController extends StateNotifier<bool> {
     }
   }
 
-  void sigInWithMail(
+  void loginWithMail(
     String email,
     String password,
     BuildContext context,
@@ -48,6 +48,32 @@ class AuthController extends StateNotifier<bool> {
     final isLogin = await _authRepository.signInWithMail(email, password);
 
     if (isLogin == false) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text("Fail"),
+          ),
+        );
+    } else {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text("Success"),
+          ),
+        );
+    }
+  }
+
+  void signUpWithMail(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
+    final isSignUp = await _authRepository.signUpWithMail(email, password);
+
+    if (isSignUp == false) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(

@@ -53,4 +53,19 @@ class AuthRepository {
       return false;
     }
   }
+
+  Future<bool> signUpWithMail(String email, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      return true;
+    } on FirebaseAuthException catch (e) {
+      // if it fails
+      print(e.toString());
+      return false;
+    }
+  }
 }
