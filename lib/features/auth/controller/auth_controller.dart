@@ -91,4 +91,26 @@ class AuthController extends StateNotifier<bool> {
         );
     }
   }
+
+  void forgotPassword(String email, BuildContext context) async {
+    final isEmailSend = _authRepository.forgotPassword(email);
+
+    if (isEmailSend == false) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text("Fail"),
+          ),
+        );
+    } else {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text("Success"),
+          ),
+        );
+    }
+  }
 }

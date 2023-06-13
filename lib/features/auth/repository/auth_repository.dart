@@ -68,4 +68,16 @@ class AuthRepository {
       return false;
     }
   }
+
+  Future<bool> forgotPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+
+      return true;
+    } on FirebaseAuthException catch (e) {
+      // if it fails
+      print(e.toString());
+      return false;
+    }
+  }
 }
