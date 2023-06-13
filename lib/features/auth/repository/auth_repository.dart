@@ -34,7 +34,20 @@ class AuthRepository {
       await _auth.signInWithCredential(credential);
 
       return true;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      // if it fails
+      print(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> signInWithMail(String email, String password) async {
+    try {
+      // sign in process
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      return true;
+    } on FirebaseAuthException catch (e) {
       // if it fails
       print(e.toString());
       return false;

@@ -18,9 +18,36 @@ class AuthController extends StateNotifier<bool> {
 
   void signInWithGoogle(BuildContext context) async {
     // return true if success, return false if failure
-    final userInfo = await _authRepository.signInWithGoogle();
+    final isLogin = await _authRepository.signInWithGoogle();
 
-    if (userInfo == false) {
+    if (isLogin == false) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text("Fail"),
+          ),
+        );
+    } else {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text("Success"),
+          ),
+        );
+    }
+  }
+
+  void sigInWithMail(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
+    // return true if success, return false if failure
+    final isLogin = await _authRepository.signInWithMail(email, password);
+
+    if (isLogin == false) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
