@@ -1,7 +1,7 @@
-class ForgotScreen extends StatefulWidget {
-  const ForgotScreen({super.key, required this.title});
+import 'package:flutter/material.dart';
 
-  final String title;
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
 
   @override
   State<ForgotScreen> createState() => _ForgotScreenState();
@@ -11,21 +11,9 @@ class _ForgotScreenState extends State<ForgotScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _emailController = TextEditingController();
 
-  Future<void> _resetPassword() async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Reset password link has sent to your email')));
-    }
-    catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    // this will be called once, when this widget is apear to the screen
-    _resetPassword();
   }
 
   @override
@@ -43,23 +31,14 @@ class _ForgotScreenState extends State<ForgotScreen> {
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value!.isEmpty || !value.contains('@')) {
-                    return 'Invalid email!';
-                  }
-                  return null;
-                  },
+                validator: (value) {},
               ),
               SizedBox(
                 height: 20,
               ),
               ElevatedButton(
                 child: Text('Forgot Password'),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _resetPassword();
-                  }
-                },
+                onPressed: () {},
               ),
             ],
           ),
