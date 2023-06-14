@@ -25,15 +25,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(
-        padding: const EdgeInsets.all(10),
-        child: TextField(
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'E-posta',
-          ),
-        ),
-      ),
+      home: Container(),
     );
   }
 }
+
