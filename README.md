@@ -1,16 +1,23 @@
-# bootcamp_flutter
+<h1>Takım İsmi</h1>
 
-A new Flutter project.
+<h1>Ürün ile İlgili Bilgiler</h1>
+<h2>Takım Elemanları</h2>
+<ul>
+  <li><a href="https://www.linkedin.com/in/sevvallbayhan/">Şevval Bayhan: Scrum Master/Developer</a></li>
+  <li><a href="https://www.linkedin.com/in/k-burak-yilmaz/">Kerem Burak Yılmaz: Product Owner/Developer</a></li>
+  <li><a href="https://www.linkedin.com/in/semanur-%C3%B6zy%C4%B1lmaz-7b081221b/">Semanur Özyılmaz: Developer</a></li>
+  <li><a href="https://www.linkedin.com/in/meryem-gul-kartal/">Meryem Gül Kartal: Developer</a></li>
+  <li><a href="https://www.linkedin.com/in/kerem-okumu%C5%9F-a76583233/">Kerem Okumuş: Developer</a></li>
+</ul>
 
-## Getting Started
+<h2>Ürün İsmi</h2>
 
-This project is a starting point for a Flutter application.
+<h2>Product Backlog URL</h2>
 
-A few resources to get you started if this is your first Flutter project:
+<h2>Ürün Açıklaması</h2>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<h2>Ürün Özellikleri</h2>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h2>Hedef Kitle</h2>
+
+<h1>Sprint 1</h1>
