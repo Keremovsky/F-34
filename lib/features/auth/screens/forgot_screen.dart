@@ -24,15 +24,18 @@ class _ForgotScreenState extends State<ForgotScreen> {
   @override
   void initState() {
     super.initState();
-    // this will be called once, when this widget is apear to the screen
+    
     _resetPassword();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF9ADBA1),
       appBar: AppBar(
-        title: Text('Forgot Password Demo'),
+        title: Text("Bütçe'm"), style: TextStyle(color: Color(0xFF000000).withOpacity(0.5))),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,7 +45,12 @@ class _ForgotScreenState extends State<ForgotScreen> {
             children: <Widget>[
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                  labelText: 'Enter your email',
+                  labelStyle: TextStyle(color: Color(0xFF000000).withOpacity(0.5)),
+                  fillColor: Color(0xFFFFFFFF).withOpacity(0.5),
+                  filled: true,
+              ),
                 validator: (value) {
                   if (value!.isEmpty || !value.contains('@')) {
                     return 'Invalid email!';
@@ -54,7 +62,9 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 height: 20,
               ),
               ElevatedButton(
-                child: Text('Forgot Password'),
+                child: Text('Forgot Password'), style: TextStyle(color: Color(0xFFFFFFFF).withOpacity(0.5))), // Custom text color for button (50% opacity)
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF243E36).withOpacity(0.5),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _resetPassword();
