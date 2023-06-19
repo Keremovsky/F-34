@@ -60,14 +60,16 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
 - Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
 
   
-- **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord ve Whatsapp üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örnekleri word olarak Readme'de tarafımızdan paylaşılmaktadır: [Daily Scrum](https://stdyildizedu-my.sharepoint.com/:w:/g/personal/sevval_bayhan_std_yildiz_edu_tr/EU2WsMomN8FEmBt3X-B3XxYBIvJ4ymKsEDk0EBR8r-AoQw?e=N58c12).
+- **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord ve Whatsapp üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örnekleri word olarak Readme'de tarafımızdan paylaşılmaktadır: [Daily Scrum](https://stdyildizedu-my.sharepoint.com/:w:/g/personal/sevval_bayhan_std_yildiz_edu_tr/EU2WsMomN8FEmBt3X-B3XxYBIvJ4ymKsEDk0EBR8r-AoQw?e=N58c12)
 
 
-- **Sprint Board Update:** Sprint Board Screenshotları:
+- **Sprint Board Update:** Sprint Board Screenshotları: ![miro](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/Kanban_Framework_1.jpg)
   
 
-- **Ürün Durumu:** Ekran Görüntüleri ve Figma UI Tasarımı:
- [Figma Linki](https://www.figma.com/file/1S1ags5leKAL7j1P1BDTOI/Untitled?type=design&node-id=0%3A1&t=vrMtoVYCaunvU6h1-1).
+- **Ürün Durumu:** Ekran Görüntüleri ve Figma UI Tasarımı: [Figma Linki](https://www.figma.com/file/1S1ags5leKAL7j1P1BDTOI/Untitled?type=design&node-id=0%3A1&t=vrMtoVYCaunvU6h1-1).
+
+ ![Login Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/login_page.png)
+ ![Sign Up Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/sign_up_page.png)
 
 
 - **Sprint Review:** Alınan Kararlar: Onboarding ve diğer ekranların koda geçirilmesi yetiştirilemediği için bir sonraki sprinte aktarılmıştır. Uygulamaya eklenmesi gereken özelliklere karar verilmiş ve 2. sprintte oylanmasına karar verilmiştir.
