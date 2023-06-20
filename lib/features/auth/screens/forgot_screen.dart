@@ -1,7 +1,8 @@
-class ForgotScreen extends StatefulWidget {
-  const ForgotScreen({super.key, required this.title});
+import 'package:bootcamp_flutter/themes/palette.dart';
+import 'package:flutter/material.dart';
 
-  final String title;
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
 
   @override
   State<ForgotScreen> createState() => _ForgotScreenState();
@@ -11,69 +12,70 @@ class _ForgotScreenState extends State<ForgotScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _emailController = TextEditingController();
 
-  Future<void> _resetPassword() async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Reset password link has sent to your email')));
-    }
-    catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
-    }
-  }
-
   @override
-  void initState() {
-    super.initState();
-    
-    _resetPassword();
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF9ADBA1),
-      appBar: AppBar(
-        title: Text("Bütçe'm"), style: TextStyle(color: Color(0xFF000000).withOpacity(0.5))),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Enter your email',
-                  labelStyle: TextStyle(color: Color(0xFF000000).withOpacity(0.5)),
-                  fillColor: Color(0xFFFFFFFF).withOpacity(0.5),
-                  filled: true,
+      backgroundColor: Palette.background,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              "Bütçe'm",
+              style: TextStyle(
+                fontSize: 32.0, 
+                fontWeight: FontWeight.bold, 
               ),
-                validator: (value) {
-                  if (value!.isEmpty || !value.contains('@')) {
-                    return 'Invalid email!';
-                  }
-                  return null;
-                  },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                child: Text('Forgot Password'), style: TextStyle(color: Color(0xFFFFFFFF).withOpacity(0.5))), // Custom text color for button (50% opacity)
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF243E36).withOpacity(0.5),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _resetPassword();
-                  }
-                },
-              ),
-            ],
+              textAlign: TextAlign.center,
+            ),
           ),
-        ),
+
+          SizedBox(height: 20),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              'Enter your email and we will send you a password reset link.',
+              textAlign: TextAlign.center,
+              ),
+          ),
+
+          SizedBox(height: 10),
+          // email textfield
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Palette.buttonBackground),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Palette.background),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: 'Email',
+                fillColor: Palette.buttonText,
+                filled: true,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+
+          MaterialButton(
+            onPressed: () {},
+            child: Text('Reset Password'),
+            color: Palette.buttonText
+          ),
+        ],
       ),
     );
   }
