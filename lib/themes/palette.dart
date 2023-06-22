@@ -5,7 +5,7 @@ class Palette {
   static final titleText = Color(0xff000000).withOpacity(0.7);
   // text field part
   static final textFieldText = Color(0xff000000).withOpacity(0.2);
-  static final textFieldBackground = Color(0xff000000).withOpacity(0.25);
+  static final textFieldBackground = Color(0x7EFFFFFF).withOpacity(0.5);
   // button part
   static final buttonText = Color(0xff000000).withOpacity(0.5);
   static final buttonBackground = Color(0xff243E36).withOpacity(0.5);
