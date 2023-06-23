@@ -13,7 +13,6 @@ class loginScreen extends ConsumerStatefulWidget {
 }
 
 class _loginScreen extends ConsumerState<loginScreen> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -31,24 +30,19 @@ class _loginScreen extends ConsumerState<loginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 88.0,
+              height: 35.0,
             ),
-            Text(
-              "Bütçe'm",
-              style: TextStyle(
-                color: Palette.titleText,
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-                shadows:[
-                  Shadow(
-                    offset: Offset(10,10),
-                    color: Color.fromARGB(0, 4, 4, 0),
-                  )
-                ]
+            Center(
+                child: Container(
+                  height:220,
+                  width: 220,
+                  child:
+                    const Image(image:
+                      AssetImage("assets/images/logo.png")),
+                ),
               ),
-            ),
             const SizedBox(
-              height: 44.0,
+              height: 20.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +72,7 @@ class _loginScreen extends ConsumerState<loginScreen> {
               ],
             ),
             SizedBox(
-              height: 44.0,
+              height: 25.0,
             ),
             Container(
               height: 62,
@@ -98,14 +92,13 @@ class _loginScreen extends ConsumerState<loginScreen> {
                     hintStyle: TextStyle(
                       color: Palette.textFieldText,
                       fontSize: 20,
-                      
                     )
                   ),
                 ),
               ),
             ),
             const SizedBox(
-              height: 26.0,
+              height: 22.0,
             ),
             Container(
               height: 62,
@@ -131,7 +124,7 @@ class _loginScreen extends ConsumerState<loginScreen> {
               ),
             ),
             const SizedBox(
-              height: 26.0,
+              height: 22.0,
             ),
             Container(
               width: double.infinity,
@@ -158,7 +151,7 @@ class _loginScreen extends ConsumerState<loginScreen> {
               ),
             ),
             SizedBox(
-              height: 12.0,
+              height: 10.0,
             ),
             Align(
               child: TextButton(
@@ -180,14 +173,14 @@ class _loginScreen extends ConsumerState<loginScreen> {
                         margin: const EdgeInsets.only(left: 10.0, right: 20.0),
                         child: Divider(
                           color: Colors.black,
-                          height: 36,
+                          height: 25,
                         )
                       ),
                   ),
               ]
             ),
             const SizedBox(
-              height: 26.0,
+              height: 20.0,
             ),
             Container(
               width: double.infinity,
