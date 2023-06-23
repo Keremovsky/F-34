@@ -1,16 +1,18 @@
-//import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
+import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:bootcamp_flutter/features/auth/repository/auth_repository.dart';
 
-class ForgotScreen extends StatefulWidget {
+class ForgotScreen extends ConsumerStatefulWidget {
   const ForgotScreen({super.key});
 
   @override
-  State<ForgotScreen> createState() => _ForgotScreenState();
+  ConsumerState<ForgotScreen> createState() => _ForgotScreenState();
 }
 
-class _ForgotScreenState extends State<ForgotScreen> {
+class _ForgotScreenState extends ConsumerState<ForgotScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _emailController = TextEditingController();
 
@@ -27,19 +29,17 @@ class _ForgotScreenState extends State<ForgotScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Text(
-              "Bütçe'm",
-              style: TextStyle(
-                fontSize: 32.0, 
-                fontWeight: FontWeight.bold, 
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
 
-          SizedBox(height: 44),
+          Center(
+                child: Container(
+                  height:180.0,
+                  width: 180.0,
+                  child:
+                  const Image(image: AssetImage("assets/images/logo3.png")),
+                ),
+              ),
+
+          SizedBox(height: 26.0),
 
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,8 +58,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
           // email textfield
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextField(
+            child: TextFormField(
               controller: _emailController,
+              validator: RequiredValidator(errorText: 'Please enter your email!'),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Palette.textFieldBackground),
@@ -78,7 +80,12 @@ class _ForgotScreenState extends State<ForgotScreen> {
           SizedBox(height: 26),
 
           MaterialButton(
-            onPressed: () {},
+            onPressed: () async {
+              final email = _emailController.text;
+              if (_formKey.currentState!.validate()) {
+                AuthController(authRepository: ref.watch(authRepositoryProvider)).forgotPassword(email, context);
+              }
+            },
             child: Text('Reset Password'),
             color: Palette.textFieldText
           ),
