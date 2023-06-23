@@ -8,5 +8,5 @@ class Palette {
   static final textFieldBackground = Color(0xff000000).withOpacity(0.25);
   // button part
   static final buttonText = Color(0xff000000).withOpacity(0.5);
-  static final buttonBackground = Color(0x7EFFFFFF).withOpacity(0.5);
+  static final buttonBackground = Color(0xff243E36).withOpacity(0.5);
 }

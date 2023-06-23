@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 import 'features/home/home_page.dart';
 import 'features/auth/screens/sign_up_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(),
+      home: loginScreen(),
     );
   }
 }
-

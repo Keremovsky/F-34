@@ -1,23 +1,34 @@
+import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:bootcamp_flutter/features/auth/repository/auth_repository.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
-class SignUpScreen extends StatefulWidget {
+
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreen();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreen();
 }
 
-class _SignUpScreen extends State<SignUpScreen> {
+class _SignUpScreen extends ConsumerState<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController surnameController = TextEditingController();
 
   bool passwordVisible = false;
   bool ?value = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +48,11 @@ class _SignUpScreen extends State<SignUpScreen> {
               ),
               Center(
                 child: Container(
-                  height:74.h,
-                  width: 160.w,
-                  child: Text(
-                      "Bütçe'm",
-                      style: TextStyle(color: Palette.titleText, fontFamily: 'Inter', fontSize: 40.sp, fontWeight: FontWeight.bold,)
-                  ),
+                  height:180.h,
+                  width: 180.w,
+                  child:
+                  const Image(image: AssetImage("assets/images/butcem_logo.png")),
                 ),
-              ),
-              SizedBox(
-                height: 26.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +65,10 @@ class _SignUpScreen extends State<SignUpScreen> {
                   TextButton(
                     child: Text('Log in instead.', style: TextStyle(color: Palette.titleText, fontFamily: 'Inria Sans', fontSize: 17.sp, decoration: TextDecoration.underline, decorationThickness: 2, fontWeight: FontWeight.bold,)),
                     onPressed: () {
-                      // Login page
+                      /*Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => loginScreen()),
+                      );*/
                     },
                   ),
                 ],
@@ -76,14 +85,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                       padding: const EdgeInsets.only(left:16, right:17, top:0, bottom:0),
                       child: TextFormField(
                         controller: nameController,
-                        validator: (value) {
-                          String? emptyValidation(String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your name!';
-                            }
-                            return null;
-                          }
-                        },
+                        validator: RequiredValidator(errorText: 'Please enter your name and surname!'),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           hintText: "name-surname",
@@ -111,17 +113,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                       padding: const EdgeInsets.only(left:16, right:17, top:0, bottom:0),
                       child: TextFormField(
                         controller: emailController,
-                        validator: (value) {
-                          String? emailValidatorMethod(String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your e-mail!';
-                            }
-                            if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-                              return 'Please enter a valid email!';
-                            }
-                            return null;
-                          }
-                        },
+                        validator: RequiredValidator(errorText: 'Please enter your email!'),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           hintText: "email",
@@ -148,17 +140,10 @@ class _SignUpScreen extends State<SignUpScreen> {
                       padding: const EdgeInsets.only(left:16, right:17, top:0, bottom:0),
                       child: TextFormField(
                         controller: passwordController,
-                        validator: (value) {
-                          String? emptyValidation(String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password!';
-                            }
-                            if (value.length < 8) {
-                              return 'Your password must be at least 8 characters!';
-                            }
-                            return null;
-                          }
-                        },
+                        validator: MultiValidator([
+                          RequiredValidator(errorText: 'Please enter password!'),
+                          MinLengthValidator(8, errorText: 'Your password must be at least 8 characters!'),
+                        ]),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           hintText: "password",
@@ -183,7 +168,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                           ),*/
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                            BorderSide(width: 0, color: Colors.transparent), //<-- SEE HER
+                            BorderSide(width: 0, color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
@@ -198,7 +183,13 @@ class _SignUpScreen extends State<SignUpScreen> {
                       width: MediaQuery.of(context).size.height.w,
                       child: ElevatedButton(
                         onPressed: () async {
-                          // Home page
+                          final name = nameController.text;
+                          final password = passwordController.text;
+                          final email = emailController.text;
+                          if (_formKey.currentState!.validate()) {
+                            AuthController(authRepository: ref.watch(authRepositoryProvider)).signUpWithMail(email,password,context);
+                          }
+
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Palette.buttonBackground,
@@ -218,6 +209,13 @@ class _SignUpScreen extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
 
