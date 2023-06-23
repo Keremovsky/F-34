@@ -15,6 +15,7 @@ class ForgotScreen extends ConsumerStatefulWidget {
 class _ForgotScreenState extends ConsumerState<ForgotScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _emailController = TextEditingController();
+  String email = "meryemgulkartal@gmail.com";
 
   @override
   void dispose() {
@@ -55,26 +56,35 @@ class _ForgotScreenState extends ConsumerState<ForgotScreen> {
           ),
 
           SizedBox(height: 44),
+
+          Form(
+            key: _formKey,
+            child: Column(
+              children:<Widget>[
           // email textfield
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextFormField(
-              controller: _emailController,
-              validator: RequiredValidator(errorText: 'Please enter your email!'),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Palette.textFieldBackground),
-                  borderRadius: BorderRadius.circular(12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextFormField(
+                    onSaved: (value) => email = value!,
+                    controller: _emailController,
+                    validator: RequiredValidator(errorText: 'Please enter your email!'),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Palette.textFieldBackground),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Palette.textFieldBackground),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Email',
+                      fillColor: Palette.textFieldText,
+                      filled: true,
+                    ),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Palette.textFieldBackground),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                hintText: 'Email',
-                fillColor: Palette.textFieldText,
-                filled: true,
-              ),
+              ],
             ),
           ),
           SizedBox(height: 26),
@@ -83,7 +93,8 @@ class _ForgotScreenState extends ConsumerState<ForgotScreen> {
             onPressed: () async {
               final email = _emailController.text;
               if (_formKey.currentState!.validate()) {
-                AuthController(authRepository: ref.watch(authRepositoryProvider)).forgotPassword(email, context);
+                 _formKey.currentState!.save();
+                ref.read(authControllerProvider.notifier).forgotPassword(email, context);
               }
             },
             child: Text('Reset Password'),
