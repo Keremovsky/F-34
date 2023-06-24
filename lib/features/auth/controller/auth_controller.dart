@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bootcamp_flutter/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bootcamp_flutter/features/auth/repository/auth_repository.dart';
@@ -20,20 +21,14 @@ class AuthController extends StateNotifier<bool> {
     // return true if success, return false if failure
     final isLogin = await _authRepository.signInWithGoogle();
 
-    if (isLogin == false) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text("Fail"),
-          ),
-        );
+    if (isLogin == true) {
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } else {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text("Success"),
+            content: Text("Login process failed."),
           ),
         );
     }
@@ -47,20 +42,14 @@ class AuthController extends StateNotifier<bool> {
     // return true if success, return false if failure
     final isLogin = await _authRepository.signInWithMail(email, password);
 
-    if (isLogin == false) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text("Fail"),
-          ),
-        );
+    if (isLogin == true) {
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } else {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text("Success"),
+            content: Text("Login process failed."),
           ),
         );
     }
@@ -73,12 +62,12 @@ class AuthController extends StateNotifier<bool> {
   ) async {
     final isSignUp = await _authRepository.signUpWithMail(email, password);
 
-    if (isSignUp == false) {
+    if (isSignUp == true) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text("Fail"),
+            content: Text("Sign up is successful."),
           ),
         );
     } else {
@@ -86,7 +75,7 @@ class AuthController extends StateNotifier<bool> {
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text("Success"),
+            content: Text("Sign up is not successful."),
           ),
         );
     }
@@ -95,12 +84,12 @@ class AuthController extends StateNotifier<bool> {
   void forgotPassword(String email, BuildContext context) async {
     final isEmailSend = _authRepository.forgotPassword(email);
 
-    if (isEmailSend == false) {
+    if (isEmailSend == true) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text("Fail"),
+            content: Text("Please check your email."),
           ),
         );
     } else {
@@ -108,7 +97,7 @@ class AuthController extends StateNotifier<bool> {
         ..hideCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: Text("Success"),
+            content: Text("Password reset process failed."),
           ),
         );
     }
