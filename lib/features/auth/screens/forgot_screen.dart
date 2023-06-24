@@ -1,11 +1,13 @@
+import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:bootcamp_flutter/features/auth/repository/auth_repository.dart';
 
 class ForgotScreen extends ConsumerStatefulWidget {
+  static final routeName = "/forgotScreen";
+
   const ForgotScreen({super.key});
 
   @override
@@ -14,12 +16,10 @@ class ForgotScreen extends ConsumerStatefulWidget {
 
 class _ForgotScreenState extends ConsumerState<ForgotScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController _emailController = TextEditingController();
-  String email = "meryemgulkartal@gmail.com";
+  late String email;
 
   @override
   void dispose() {
-    _emailController.dispose();
     super.dispose();
   }
 
@@ -27,80 +27,75 @@ class _ForgotScreenState extends ConsumerState<ForgotScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.background,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-          Center(
-                child: Container(
-                  height:180.0,
-                  width: 180.0,
-                  child:
-                  const Image(image: AssetImage("assets/images/logo3.png")),
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Container(
+                height: 220,
+                width: 220,
+                child: const Image(image: AssetImage(Constants.appLogo)),
               ),
-
-          SizedBox(height: 26.0),
-
-          Row(
+            ),
+            const SizedBox(height: 26.0),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text(
-              "Don’t worry, we got you covered.",
-              style: TextStyle(
-                color: Palette.titleText,
-                fontSize: 17
-              ),
-              ),
-              ],
-          ),
-
-          SizedBox(height: 44),
-
-          Form(
-            key: _formKey,
-            child: Column(
-              children:<Widget>[
-          // email textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextFormField(
-                    onSaved: (value) => email = value!,
-                    controller: _emailController,
-                    validator: RequiredValidator(errorText: 'Please enter your email!'),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Palette.textFieldBackground),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Palette.textFieldBackground),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Email',
-                      fillColor: Palette.textFieldText,
-                      filled: true,
-                    ),
-                  ),
+                Text(
+                  "Don’t worry, we got you covered.",
+                  style: TextStyle(color: Palette.titleText, fontSize: 17),
                 ),
               ],
             ),
-          ),
-          SizedBox(height: 26),
-
-          MaterialButton(
-            onPressed: () async {
-              final email = _emailController.text;
-              if (_formKey.currentState!.validate()) {
-                 _formKey.currentState!.save();
-                ref.read(authControllerProvider.notifier).forgotPassword(email, context);
-              }
-            },
-            child: Text('Reset Password'),
-            color: Palette.textFieldText
-          ),
-        ],
+            const SizedBox(height: 44),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  // email textfield
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextFormField(
+                      onSaved: (value) => email = value!,
+                      validator: RequiredValidator(
+                          errorText: 'Please enter your email!'),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Palette.textFieldBackground),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Palette.textFieldBackground),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        hintText: 'Email',
+                        fillColor: Palette.textFieldText,
+                        filled: true,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 26),
+            MaterialButton(
+              child: const Text('Reset Password'),
+              color: Palette.textFieldText,
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  ref
+                      .read(authControllerProvider.notifier)
+                      .forgotPassword(email, context);
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
