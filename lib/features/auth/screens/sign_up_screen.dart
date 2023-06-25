@@ -187,7 +187,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                           if (_formKey.currentState!.validate()) {
                             ref
                                 .read(authControllerProvider.notifier)
-                                .signUpWithMail(email, password, context);
+                                .signUpWithMail(email, password, name, context);
                           }
                         },
                         style: ElevatedButton.styleFrom(
