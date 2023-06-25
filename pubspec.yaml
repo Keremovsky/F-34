@@ -40,8 +40,9 @@ dependencies:
   cloud_firestore: ^4.8.0
   firebase_auth: ^4.6.2
   google_sign_in: ^6.1.4
-  image_picker: ^0.8.9
-
+  flutter_screenutil: ^5.8.4
+  form_field_validator: ^1.1.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -58,12 +59,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+
   assets:
     - assets/images/
     - assets/icons/
