@@ -1,5 +1,6 @@
+import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
-import 'palette.dart';
+
 
 class IncomeScreen extends StatefulWidget {
   @override
@@ -12,17 +13,11 @@ class _IncomeScreenState extends State<IncomeScreen> {
   String? description;
   String? category;
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.background,
-      appBar: AppBar(
-        backgroundColor: Palette.background,
-        elevation: 0,
-        ),
-        centerTitle: true,
-        elevation: 0,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -64,10 +59,11 @@ class _IncomeScreenState extends State<IncomeScreen> {
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
+                dropdownColor: Palette.categoryBackground,
                 items: [
-                  DropdownMenuItem(child: Text('Salary'), value: 'salary'),
-                  DropdownMenuItem(child: Text('Freelance'), value: 'freelance'),
-                  DropdownMenuItem(child: Text('Personal'), value: 'personal'),
+                  DropdownMenuItem(child: Text('Salary', style: TextStyle(color: Palette.categoryText)), value: 'salary'),
+                  DropdownMenuItem(child: Text('Freelance', style: TextStyle(color: Palette.categoryText)), value: 'freelance'),
+                  DropdownMenuItem(child: Text('Personal', style: TextStyle(color: Palette.categoryText)), value: 'personal'),
                 ],
                 onChanged: (value) => category = value as String?,
               ),
@@ -82,10 +78,9 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    // Do something with amount, description, and category
                   }
                 },
-                child: Text('Add to Wallet'),
+                child: Text('Submit'),
               ),
             ],
           ),
