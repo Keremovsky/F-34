@@ -1,171 +1,203 @@
+import 'package:bootcamp_flutter/core/constants/constants.dart';
+import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
+import 'package:bootcamp_flutter/features/auth/screens/forgot_screen.dart';
+import 'package:bootcamp_flutter/features/auth/screens/sign_up_screen.dart';
+import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+import '../repository/auth_repository.dart';
+
+class LoginScreen extends ConsumerStatefulWidget {
+  static final routeName = "/loginScreen";
+
+  const LoginScreen({super.key});
 
   @override
-  State<loginScreen> createState() => _homePageState();
+  ConsumerState<LoginScreen> createState() => _LoginScreen();
 }
 
-class _homePageState extends State<loginScreen> {
+class _LoginScreen extends ConsumerState<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
+      backgroundColor: Palette.background,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-            const Text(
-              "App Name",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 35.0,
               ),
-            ),
-            const SizedBox(
-              height: 44.0,
-            ),
-            Container(
-              width: double.infinity,
-              child: RawMaterialButton(
-                  fillColor: Color.fromARGB(255, 33, 150, 243),
-                  elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  onPressed: () {},
-                  child: Text(
-                    "Login with Google",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 19,
-                    ),
-                  )),
-            ),
-            SizedBox(
-              height: 12.0,
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Container(
-              width: double.infinity,
-              child: RawMaterialButton(
-                  fillColor: Color.fromARGB(255, 33, 150, 243),
-                  elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return Scaffold(
-                              appBar: AppBar(), body: loginMailScreen());
-                        },
+              Center(
+                child: Container(
+                  height: 220,
+                  width: 220,
+                  child: const Image(image: AssetImage(Constants.appLogo)),
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don’t have an account?",
+                    style: TextStyle(color: Palette.titleText, fontSize: 17),
+                  ),
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(SignUpScreen.routeName);
+                    },
+                    child: Text(
+                      "Sign up instead.",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Palette.buttonText,
+                        decoration: TextDecoration.underline,
                       ),
-                    );
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 25.0),
+              Container(
+                height: 62,
+                decoration: BoxDecoration(
+                    color: Palette.textFieldBackground,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Email",
+                      hintStyle: TextStyle(
+                        color: Palette.textFieldText,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 22.0,
+              ),
+              Container(
+                height: 62,
+                decoration: BoxDecoration(
+                  color: Palette.textFieldBackground,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    obscureText: true,
+                    controller: passwordController,
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      border: InputBorder.none,
+                      hintStyle:
+                          TextStyle(color: Palette.textFieldText, fontSize: 20),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 22.0),
+              Container(
+                width: double.infinity,
+                child: RawMaterialButton(
+                  fillColor: Palette.buttonBackground,
+                  elevation: 0.0,
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  onPressed: () async {
+                    final password = passwordController.text;
+                    final email = emailController.text;
+                    ref
+                        .read(authControllerProvider.notifier)
+                        .loginWithMail(email, password, context);
                   },
                   child: Text(
-                    "Login with E-mail",
+                    "Log In",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.8,
+                      color: Palette.buttonText,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                  )),
-            ),
-            SizedBox(
-              height: 12.0,
-            ),
-          ])),
-    );
-  }
-}
-
-class loginMailScreen extends StatefulWidget {
-  const loginMailScreen({super.key});
-
-  @override
-  State<loginMailScreen> createState() => _loginMailScreen();
-}
-
-class _loginMailScreen extends State<loginMailScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            const Text(
-              "App Name",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 44.0,
-            ),
-            const TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: "Email",
-                prefixIcon: Icon(Icons.mail, color: Colors.grey),
-              ),
-            ),
-            const SizedBox(
-              height: 26.0,
-            ),
-            const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.remove_red_eye, color: Colors.grey),
-                )),
-            const SizedBox(
-              height: 12.0,
-            ),
-            const Text(
-              "Forget your password?",
-              style: TextStyle(color: Colors.blue),
-            ),
-            const SizedBox(
-              height: 88.0,
-            ),
-            Container(
-              width: double.infinity,
-              child: RawMaterialButton(
-                  fillColor: Color.fromARGB(255, 33, 150, 243),
-                  elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  onPressed: () {},
+              const SizedBox(height: 10.0),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(ForgotScreen.routeName);
+                  },
                   child: Text(
-                    "Login",
+                    "Forgot password?",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.8,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Palette.buttonText,
                     ),
-                  )),
-            ),
-            SizedBox(
-              height: 12.0,
-            ),
-            Align(
-              child: const Text(
-                "Don't have account? Sign Up",
-                style: TextStyle(color: Colors.blue),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 88.0,
-            )
-          ],
-        ));
+              Row(children: <Widget>[
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                    child: const Divider(
+                      color: Colors.black,
+                      height: 25,
+                    ),
+                  ),
+                ),
+              ]),
+              const SizedBox(height: 20.0),
+              Container(
+                width: double.infinity,
+                child: RawMaterialButton(
+                    fillColor: Palette.buttonBackground,
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {
+                      ref
+                          .read(authControllerProvider.notifier)
+                          .signInWithGoogle(context);
+                    }, //Google login
+                    child: Text(
+                      "Log In With Google",
+                      style: TextStyle(
+                          color: Palette.buttonText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    )),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
