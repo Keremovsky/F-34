@@ -1,24 +1,34 @@
 import 'package:bootcamp_flutter/core/providers/firebase_providers.dart';
+import 'package:bootcamp_flutter/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 // authentication repository provider
 final authRepositoryProvider = Provider((ref) => AuthRepository(
       auth: ref.read(authProvider),
       googleSignIn: ref.read(googleSignInProvider),
+      firestore: ref.read(firestoreProvider),
     ));
 
 class AuthRepository {
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
+  final FirebaseFirestore _firestore;
 
-  AuthRepository(
-      {required FirebaseAuth auth, required GoogleSignIn googleSignIn})
-      : _auth = auth,
-        _googleSignIn = googleSignIn;
+  CollectionReference get _userRef => _firestore.collection("users");
 
-  Future<bool> signInWithGoogle() async {
+  AuthRepository({
+    required FirebaseAuth auth,
+    required GoogleSignIn googleSignIn,
+    required FirebaseFirestore firestore,
+  })  : _auth = auth,
+        _googleSignIn = googleSignIn,
+        _firestore = firestore;
+
+  Future<Either<String, UserModel>> signInWithGoogle() async {
     try {
       // start point of sign in process
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -31,39 +41,70 @@ class AuthRepository {
       );
 
       // sign in with google
-      await _auth.signInWithCredential(credential);
+      UserCredential user = await _auth.signInWithCredential(credential);
 
-      return true;
+      // create new user in database if user doesn't exist
+      UserModel userModel;
+      if (user.additionalUserInfo!.isNewUser) {
+        userModel = UserModel(
+          uid: user.user!.uid,
+          name: user.user!.displayName!,
+          email: user.user!.email!,
+        );
+
+        await _userRef.doc(user.user!.uid).set(userModel.toMap());
+      } else {
+        // get user model
+        userModel = await getUserModel(user.user!.uid).first;
+      }
+
+      return right(userModel);
     } on FirebaseAuthException catch (e) {
       // if it fails
       print(e.toString());
-      return false;
+      return left(e.toString());
     }
   }
 
-  Future<bool> signInWithMail(String email, String password) async {
+  Future<Either<String, UserModel>> signInWithMail(
+      String email, String password) async {
     try {
       // sign in process
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      final user = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
 
-      return true;
+      // get user model
+      UserModel userModel = await getUserModel(user.user!.uid).first;
+
+      return right(userModel);
     } on FirebaseAuthException catch (e) {
       // if it fails
       print(e.toString());
-      return false;
+      return left(e.toString());
     }
   }
 
-  Future<bool> signUpWithMail(String email, String password) async {
+  Future<bool> signUpWithMail(
+      String email, String password, String name) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      // sign up process
+      UserCredential user = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
+      // create new user in database
+      UserModel userModel = UserModel(
+        uid: user.user!.uid,
+        name: name,
+        email: email,
+      );
+
+      await _userRef.doc(user.user!.uid).set(userModel.toMap());
+
       return true;
     } on FirebaseAuthException catch (e) {
-      // if it fails
+      // if it fail
       print(e.toString());
       return false;
     }
@@ -71,6 +112,7 @@ class AuthRepository {
 
   Future<bool> forgotPassword(String email) async {
     try {
+      // send reset password mail to user
       await _auth.sendPasswordResetEmail(email: email);
 
       return true;
@@ -79,5 +121,11 @@ class AuthRepository {
       print(e.toString());
       return false;
     }
+  }
+
+  // get user's data via uid
+  Stream<UserModel> getUserModel(String uid) {
+    return _userRef.doc(uid).snapshots().map(
+        (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
   }
 }

@@ -132,7 +132,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                     final email = emailController.text;
                     ref
                         .read(authControllerProvider.notifier)
-                        .loginWithMail(email, password, context);
+                        .signInWithMail(email, password, context);
                   },
                   child: Text(
                     "Log In",
