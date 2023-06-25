@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 <<<<<<< HEAD
-      home: ,
+      home: IncomeScreen(),
 =======
       routes: {
         "/": (context) => LoginScreen(),
