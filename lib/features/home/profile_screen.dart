@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:bootcamp_flutter/themes/palette.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../core/constants/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -15,25 +16,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   File? _image;
 
-  Future<void> _uploadImage() async {
-    if (_image != null) {
-      try {
-        FirebaseStorage storage = FirebaseStorage.instance;
-        Reference reference =
-            storage.ref().child('profile_pictures/${DateTime.now()}.png');
-        UploadTask uploadTask = reference.putFile(_image!);
-        TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-        String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-
-        print('Profile picture uploaded: $downloadUrl');
-      } on FirebaseException catch (e) {
-        print('Error uploading profile picture: $e');
-      }
-    } else {
-      print('No image selected');
-    }
-  }
-
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
@@ -43,8 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: InkWell(
                     onTap: _pickImage,
                     child: CircleAvatar(
-                      backgroundImage: _image != null ? FileImage(_image!) : null,
+                      foregroundImage: _image != null ? FileImage(_image!) : null,
+                      backgroundImage: const AssetImage(Constants.profilePicture),
                     ),
                   ),
                 ),
