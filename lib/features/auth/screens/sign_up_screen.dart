@@ -80,7 +80,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 48.h),
+              SizedBox(height: 40.h),
               Form(
                 key: _formKey,
                 child: Column(
@@ -174,7 +174,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 92.h,
+                      height: 75.h,
                     ),
                     SizedBox(
                       height: 50.h,

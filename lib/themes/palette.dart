@@ -9,4 +9,7 @@ class Palette {
   // button part
   static final buttonText = Color(0xff000000).withOpacity(0.5);
   static final buttonBackground = Color(0xff243E36).withOpacity(0.5);
+  // home screen
+  static final sideMenuBackground = Color(0xffACD9B6);
+  static final pieChartColor = Color(0xFFFFFF).withOpacity(0.5);
 }
