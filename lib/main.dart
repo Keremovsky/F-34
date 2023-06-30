@@ -1,7 +1,14 @@
+import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
+import 'package:bootcamp_flutter/features/expense/screens/expense_screen.dart.dart';
+import 'package:bootcamp_flutter/features/home/profile_screen.dart';
+import 'package:bootcamp_flutter/features/income/screens/income_screen.dart.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'features/auth/screens/forgot_screen.dart';
+import 'features/auth/screens/sign_up_screen.dart';
+import 'features/home/home_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,14 +29,17 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Bootcamp',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade800),
         useMaterial3: true,
       ),
       routes: {
-        "/": (context) => ExpenseScreen(),
+        "/": (context) => ProfileScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
         ForgotScreen.routeName: (context) => ForgotScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        ProfileScreen.routeName: (context) => ProfileScreen(),
+        IncomeScreen.routeName: (context) => IncomeScreen(),
+        ExpenseScreen.routeName: (context) => ExpenseScreen(),
       },
     );
   }
