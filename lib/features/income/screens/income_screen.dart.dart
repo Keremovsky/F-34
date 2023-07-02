@@ -1,8 +1,9 @@
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 
-
 class IncomeScreen extends StatefulWidget {
+  static final routeName = "/incomeScreen";
+
   @override
   _IncomeScreenState createState() => _IncomeScreenState();
 }
@@ -13,7 +14,6 @@ class _IncomeScreenState extends State<IncomeScreen> {
   String? description;
   String? category;
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Amount',
@@ -43,7 +43,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ),
                 onSaved: (value) => amount = value,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Description',
@@ -52,7 +52,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ),
                 onSaved: (value) => description = value,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               DropdownButtonFormField(
                 decoration: InputDecoration(
                   labelText: 'Category',
@@ -61,17 +61,26 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 ),
                 dropdownColor: Palette.categoryBackground,
                 items: [
-                  DropdownMenuItem(child: Text('Salary', style: TextStyle(color: Palette.categoryText)), value: 'salary'),
-                  DropdownMenuItem(child: Text('Freelance', style: TextStyle(color: Palette.categoryText)), value: 'freelance'),
-                  DropdownMenuItem(child: Text('Personal', style: TextStyle(color: Palette.categoryText)), value: 'personal'),
+                  DropdownMenuItem(
+                      value: 'salary',
+                      child: Text('Salary',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'freelance',
+                      child: Text('Freelance',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'personal',
+                      child: Text('Personal',
+                          style: TextStyle(color: Palette.categoryText))),
                 ],
                 onChanged: (value) => category = value as String?,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Palette.buttonBackground),
+                  backgroundColor:
+                      MaterialStateProperty.all(Palette.buttonBackground),
                   foregroundColor:
                       MaterialStateProperty.all(Palette.buttonText),
                 ),
@@ -80,7 +89,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
                     _formKey.currentState!.save();
                   }
                 },
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),
