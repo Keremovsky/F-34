@@ -1,8 +1,9 @@
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 
-
 class ExpenseScreen extends StatefulWidget {
+  static final routeName = "/expenseScreen";
+
   @override
   _ExpenseScreenState createState() => _ExpenseScreenState();
 }
@@ -23,7 +24,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           key: _formKey,
           child: ListView(
             children: [
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Enter Outcome',
                 style: TextStyle(
@@ -33,7 +34,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Amount',
@@ -42,7 +43,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 ),
                 onSaved: (value) => amount = value,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Description',
@@ -51,7 +52,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 ),
                 onSaved: (value) => description = value,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               DropdownButtonFormField(
                 decoration: InputDecoration(
                   labelText: 'Category',
@@ -60,26 +61,62 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 ),
                 dropdownColor: Palette.categoryBackground,
                 items: [
-                  DropdownMenuItem(child: Text('Home and Living', style: TextStyle(color: Palette.categoryText)), value: 'home'),
-                  DropdownMenuItem(child: Text('Food', style: TextStyle(color: Palette.categoryText)), value: 'food'),
-                  DropdownMenuItem(child: Text('Transportation', style: TextStyle(color: Palette.categoryText)), value: 'Transportation'),
-                  DropdownMenuItem(child: Text('Health', style: TextStyle(color: Palette.categoryText)), value: 'health'),
-                  DropdownMenuItem(child: Text('Education', style: TextStyle(color: Palette.categoryText)), value: 'education'),
-                  DropdownMenuItem(child: Text('Personal Care and Clothing', style: TextStyle(color: Palette.categoryText)), value: 'personalcare'),
-                  DropdownMenuItem(child: Text('Entertainment and Hobbies', style: TextStyle(color: Palette.categoryText)), value: 'entertainment'),
-                  DropdownMenuItem(child: Text('Travel', style: TextStyle(color: Palette.categoryText)), value: 'travel'),
-                  DropdownMenuItem(child: Text('Debt and Loan Payments', style: TextStyle(color: Palette.categoryText)), value: 'debt'),
-                  DropdownMenuItem(child: Text('Insurance and Investments', style: TextStyle(color: Palette.categoryText)), value: 'investments'),
-                  DropdownMenuItem(child: Text('Gifts and Donations', style: TextStyle(color: Palette.categoryText)), value: 'gifts'),
-                  DropdownMenuItem(child: Text('Other', style: TextStyle(color: Palette.categoryText)), value: 'other'),
+                  DropdownMenuItem(
+                      value: 'home',
+                      child: Text('Home and Living',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'food',
+                      child: Text('Food',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'Transportation',
+                      child: Text('Transportation',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'health',
+                      child: Text('Health',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'education',
+                      child: Text('Education',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'personalcare',
+                      child: Text('Personal Care and Clothing',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'entertainment',
+                      child: Text('Entertainment and Hobbies',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'travel',
+                      child: Text('Travel',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'debt',
+                      child: Text('Debt and Loan Payments',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'investments',
+                      child: Text('Insurance and Investments',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'gifts',
+                      child: Text('Gifts and Donations',
+                          style: TextStyle(color: Palette.categoryText))),
+                  DropdownMenuItem(
+                      value: 'other',
+                      child: Text('Other',
+                          style: TextStyle(color: Palette.categoryText))),
                 ],
                 onChanged: (value) => category = value as String?,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Palette.buttonBackground),
+                  backgroundColor:
+                      MaterialStateProperty.all(Palette.buttonBackground),
                   foregroundColor:
                       MaterialStateProperty.all(Palette.categoryText),
                 ),
@@ -88,7 +125,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     _formKey.currentState!.save();
                   }
                 },
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),

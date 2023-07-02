@@ -81,3 +81,71 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
 - **Sprint Retrospective:**
   - Takımiçi iletişimin geliştirilmesine karar verilmiştir.
   - Takımın üyelerinin diğer sprintlerde daha aktif rol almasına karar verilmiştir.
+
+
+
+<h1>Sprint 2</h1>
+
+
+- **Sprint Notları:** User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir.
+
+
+- **Sprint içinde tamamlanması tahmin edilen puan:** 100 Puan
+
+  
+- **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanması gereken 250 puanlık backlog bulunmaktadır. İkinci sprintte iş yükü fazla olduğu için daha fazla puan hedeflenmiştir. Hedef puan, toplam puanın yarısından az olarak belirlenmiştir.
+
+  
+- **Backlog düzeni ve Story seçimleri:** Backlog'umuz yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde önceliklendirilenler arasından seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur.
+
+  
+- Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
+
+  
+- **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord ve Whatsapp üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örnekleri word olarak Readme'de tarafımızdan paylaşılmaktadır: [Daily Scrum]( https://stdyildizedu-my.sharepoint.com/:w:/g/personal/sevval_bayhan_std_yildiz_edu_tr/ESML3qdDW85MiyiCaVG3wXcBAWtdl_W56vVfer8zEn5z0g?e=rltgHA)
+
+
+- **Sprint Board Update:** Sprint Board Screenshotları: ![miro1](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/Kanban_Framework_2.jpg).![miro1](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/Kanban_Framework_3.jpg).
+  
+
+- **Ürün Durumu:** Ekran Görüntüleri: 
+
+ <table>
+  <tr>
+    <td>1</td>
+     <td>2</td>
+     <td>3</td>
+    
+
+  <tr>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/log%20in.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/sign%20up.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/forgot.png" width="270" height="540"></td>
+   
+ </table>
+
+<table>
+  <tr>
+    <td>4</td>
+     <td>5</td>
+     <td>6</td>
+    
+
+  <tr>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/enter%20outcome.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/enter%20income.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/profile.png" width="270" height="540"></td>
+   
+ </table>
+
+
+
+- **Sprint Review:** Alınan Kararlar: Yetiştirilemeyen görevlerin bir sonraki sprintte tamamlanmasına karar verilmiştir. Uygulamanın mevcut durumu gözden geçirilmiş ve eksik yönleri belirlenmiştir.
+
+- **Sprint Review Katılımcıları:** Kerem Okumuş, Meryem Gül Kartal, Semanur Özyılmaz, Kerem Burak Yılmaz, Şevval Bayhan
+
+
+- **Sprint Retrospective:**
+  - Takımiçi iletişimin yeterli düzeyde olmadığına karar verilmiştir.
+  - Takımın üyelerinin diğer sprintlerde daha aktif rol almasına karar verilmiştir.
+

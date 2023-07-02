@@ -4,7 +4,6 @@ import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:bootcamp_flutter/features/auth/repository/auth_repository.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -48,8 +47,8 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
               ),
               Center(
                 child: Container(
-                  height: 220.h,
-                  width: 220.w,
+                  height: 220,
+                  width: 220,
                   child: const Image(image: AssetImage(Constants.appLogo)),
                 ),
               ),
@@ -80,7 +79,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 40.h),
+              const SizedBox(height: 25),
               Form(
                 key: _formKey,
                 child: Column(
@@ -94,7 +93,6 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                             errorText: 'Please enter your name and surname!'),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
-                          hintText: "name-surname",
                           labelText: "Name-Surname",
                           border: InputBorder.none,
                           labelStyle: TextStyle(
@@ -110,7 +108,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 24.h),
+                    const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 16, right: 17, top: 0, bottom: 0),
@@ -120,7 +118,6 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                             errorText: 'Please enter your email!'),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
-                          hintText: "email",
                           labelText: "Email",
                           border: InputBorder.none,
                           labelStyle: TextStyle(
@@ -136,9 +133,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
+                    const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 16, right: 17, top: 0, bottom: 0),
@@ -157,7 +152,6 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
-                          hintText: "password",
                           labelText: "Password",
                           border: InputBorder.none,
                           labelStyle: TextStyle(
@@ -173,11 +167,8 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 75.h,
-                    ),
-                    SizedBox(
-                      height: 50.h,
+                    const SizedBox(height: 92),
+                    const SizedBox(height: 50),
                       width: MediaQuery.of(context).size.height.w,
                       child: ElevatedButton(
                         onPressed: () async {
