@@ -137,7 +137,15 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
     <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%202/profile.png" width="270" height="540"></td>
    
  </table>
-
+ 
+ <table>
+   <tr>
+      <td>7</td>
+      <td>8</td>
+   <tr>  
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/kerem/Project%20Managment/Sprint%202/home_page.jpeg" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/kerem/Project%20Managment/Sprint%202/menus.jpeg" width="270" height="540"></td>
+ </table>
 
 
 - **Sprint Review:** Alınan Kararlar: Yetiştirilemeyen görevlerin bir sonraki sprintte tamamlanmasına karar verilmiştir. Uygulamanın mevcut durumu gözden geçirilmiş ve eksik yönleri belirlenmiştir.
