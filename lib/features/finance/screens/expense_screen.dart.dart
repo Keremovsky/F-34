@@ -1,17 +1,19 @@
+import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ExpenseScreen extends StatefulWidget {
+class ExpenseScreen extends ConsumerStatefulWidget {
   static final routeName = "/expenseScreen";
 
   @override
   _ExpenseScreenState createState() => _ExpenseScreenState();
 }
 
-class _ExpenseScreenState extends State<ExpenseScreen> {
+class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? amount;
   String? description;
+  String? amount;
   String? category;
 
   @override
@@ -123,6 +125,13 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
+                    ref.read(financeControllerProvider.notifier).addFinance(
+                          description!,
+                          category!,
+                          "expense",
+                          double.parse(amount!),
+                          context,
+                        );
                   }
                 },
                 child: const Text('Submit'),

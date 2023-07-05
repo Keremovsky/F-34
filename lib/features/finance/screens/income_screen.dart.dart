@@ -1,14 +1,17 @@
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IncomeScreen extends StatefulWidget {
+import '../controller/finance_controller.dart';
+
+class IncomeScreen extends ConsumerStatefulWidget {
   static final routeName = "/incomeScreen";
 
   @override
   _IncomeScreenState createState() => _IncomeScreenState();
 }
 
-class _IncomeScreenState extends State<IncomeScreen> {
+class _IncomeScreenState extends ConsumerState<IncomeScreen> {
   final _formKey = GlobalKey<FormState>();
   String? amount;
   String? description;
@@ -24,7 +27,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
           key: _formKey,
           child: ListView(
             children: [
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Enter Income',
                 style: TextStyle(
@@ -87,6 +90,13 @@ class _IncomeScreenState extends State<IncomeScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
+                    ref.read(financeControllerProvider.notifier).addFinance(
+                          description!,
+                          category!,
+                          "income",
+                          double.parse(amount!),
+                          context,
+                        );
                   }
                 },
                 child: const Text('Submit'),

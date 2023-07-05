@@ -75,7 +75,7 @@ class AuthController extends StateNotifier<bool> {
       String email, String password, String name, BuildContext context) async {
     final control = await _authRepository.signUpWithMail(email, password, name);
 
-    if (control == true) {
+    if (control) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(

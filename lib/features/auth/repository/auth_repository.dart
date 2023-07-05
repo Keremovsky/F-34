@@ -50,6 +50,7 @@ class AuthRepository {
           uid: user.user!.uid,
           name: user.user!.displayName!,
           email: user.user!.email!,
+          money: 0,
         );
 
         await _userRef.doc(user.user!.uid).set(userModel.toMap());
@@ -98,6 +99,7 @@ class AuthRepository {
         uid: user.user!.uid,
         name: name,
         email: email,
+        money: 0,
       );
 
       await _userRef.doc(user.user!.uid).set(userModel.toMap());
