@@ -1,13 +1,14 @@
 import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
-import 'package:bootcamp_flutter/features/finance/screens/expense_screen.dart.dart';
+import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/features/home/profile_screen.dart';
-import 'package:bootcamp_flutter/features/finance/screens/income_screen.dart.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'features/auth/screens/forgot_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
+import 'features/finance/screens/expense_screen.dart';
+import 'features/finance/screens/income_screen.dart';
 import 'features/home/home_screen.dart';
 import 'firebase_options.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         ProfileScreen.routeName: (context) => ProfileScreen(),
         IncomeScreen.routeName: (context) => IncomeScreen(),
         ExpenseScreen.routeName: (context) => ExpenseScreen(),
+        FinanceListScreen.routeName: (context) => FinanceListScreen(),
       },
     );
   }

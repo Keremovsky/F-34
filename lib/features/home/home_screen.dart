@@ -1,11 +1,13 @@
-import 'package:bootcamp_flutter/features/finance/screens/expense_screen.dart.dart';
-import 'package:bootcamp_flutter/features/finance/screens/income_screen.dart.dart';
+import 'package:bootcamp_flutter/features/home/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:pie_chart/pie_chart.dart';
+
+import '../finance/screens/expense_screen.dart';
+import '../finance/screens/income_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   static final routeName = "/homeScreen";
@@ -64,7 +66,9 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
             width: 140.w,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(ProfileScreen.routeName);
+            },
             child: Container(
               height: 50.h,
               width: 50.w,

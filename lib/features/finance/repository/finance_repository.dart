@@ -2,6 +2,7 @@ import 'package:bootcamp_flutter/core/providers/firebase_providers.dart';
 import 'package:bootcamp_flutter/models/finance.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import '../../auth/controller/auth_controller.dart';
 
 final financeRepositoryProvider = Provider((ref) => FinanceRepository(
@@ -19,6 +20,8 @@ class FinanceRepository {
 
   CollectionReference get _finances =>
       _firestore.collection("users/${_ref.read(userProvider)!.uid}/finances");
+
+  CollectionReference get _users => _firestore.collection("users");
 
   Future<bool> addFinance(
       String description, String type, String subType, double value) async {
@@ -76,5 +79,10 @@ class FinanceRepository {
       print(e.toString());
       return false;
     }
+  }
+
+  Stream<QuerySnapshot<Object?>> getFinanceStream() {
+    final snapshots = _finances.snapshots();
+    return snapshots;
   }
 }

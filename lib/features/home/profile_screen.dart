@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -74,19 +75,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
                   width: double.infinity,
                   child: RawMaterialButton(
-                      fillColor: Palette.textFieldBackground,
-                      elevation: 0.0,
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      onPressed: () {},
-                      child: Text(
-                        "Past Goals",
-                        style: TextStyle(
-                            color: Palette.buttonText,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      )),
+                    fillColor: Palette.textFieldBackground,
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {},
+                    child: Text(
+                      "Past Goals",
+                      style: TextStyle(
+                          color: Palette.buttonText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 35),
@@ -100,7 +102,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(FinanceListScreen.routeName);
+                      },
                       child: Text(
                         "Past Actions",
                         style: TextStyle(

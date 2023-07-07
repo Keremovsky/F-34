@@ -105,7 +105,7 @@ class AuthRepository {
       await _userRef.doc(user.user!.uid).set(userModel.toMap());
 
       return true;
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       // if it fail
       print(e.toString());
       return false;

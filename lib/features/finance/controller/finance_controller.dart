@@ -25,6 +25,8 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
+        Future.delayed(const Duration(seconds: 1));
+        Navigator.of(context).pop();
       }
     } else {
       if (mounted) {
@@ -39,6 +41,8 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
+        Future.delayed(const Duration(seconds: 1));
+        Navigator.of(context).pop();
       }
     } else {
       if (mounted) {
@@ -55,12 +59,64 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
+        Future.delayed(const Duration(seconds: 1));
+        Navigator.of(context).pop();
       }
     } else {
       if (mounted) {
         _giveFeedback("Failure", context);
       }
     }
+  }
+
+  Widget getFinanceStream(
+      BuildContext context, String searchText, String subType) {
+    final result = _financeRepository.getFinanceStream();
+
+    return StreamBuilder(
+      stream: result,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // get all finances from database
+          List<Finance> finances = snapshot.data!.docs
+              .map((e) => Finance.fromMap(e.data() as Map<String, dynamic>))
+              .toList();
+
+          // filter with given text
+          finances = finances.where((finance) {
+            final actual = finance.description.toLowerCase();
+            final input = searchText.toLowerCase();
+
+            return actual.contains(input);
+          }).toList();
+
+          // filter with given text
+          finances = finances.where((finance) {
+            final actual = finance.subType;
+
+            return actual.contains(subType);
+          }).toList();
+
+          return ListView.builder(
+            itemCount: finances.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                children: [
+                  Text(finances[index].description),
+                  const SizedBox(height: 20),
+                ],
+              );
+            },
+          );
+        } else {
+          return const SizedBox(
+            height: 100,
+            width: 100,
+            child: Text("No Finance Data :("),
+          );
+        }
+      },
+    );
   }
 }
 
