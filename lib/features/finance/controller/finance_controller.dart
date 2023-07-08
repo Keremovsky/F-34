@@ -1,7 +1,7 @@
 import 'package:bootcamp_flutter/features/finance/repository/finance_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:fpdart/fpdart.dart';
 import '../../../models/finance.dart';
 
 final financeControllerProvider = StateNotifierProvider(
@@ -17,16 +17,16 @@ class FinanceController extends StateNotifier {
       : _financeRepository = financeRepository,
         super(false);
 
-  void addFinance(String description, String type, String subType, double value,
-      BuildContext context) async {
-    final control =
-        await _financeRepository.addFinance(description, type, subType, value);
+  void addFinance(String title, String description, String type, String subType,
+      double value, BuildContext context) async {
+    final control = await _financeRepository.addFinance(
+        title, description, type, subType, value);
 
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(seconds: 1));
-        Navigator.of(context).pop();
+        Future.delayed(const Duration(seconds: 1))
+            .then((value) => Navigator.of(context).pop());
       }
     } else {
       if (mounted) {
@@ -41,8 +41,8 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(seconds: 1));
-        Navigator.of(context).pop();
+        Future.delayed(const Duration(seconds: 1))
+            .then((value) => Navigator.of(context).pop());
       }
     } else {
       if (mounted) {
@@ -59,8 +59,8 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(seconds: 1));
-        Navigator.of(context).pop();
+        Future.delayed(const Duration(seconds: 1))
+            .then((value) => Navigator.of(context).pop());
       }
     } else {
       if (mounted) {
@@ -70,7 +70,7 @@ class FinanceController extends StateNotifier {
   }
 
   Widget getFinanceStream(
-      BuildContext context, String searchText, String subType) {
+      BuildContext context, String searchText, Map<String, dynamic> filter) {
     final result = _financeRepository.getFinanceStream();
 
     return StreamBuilder(
@@ -82,19 +82,9 @@ class FinanceController extends StateNotifier {
               .map((e) => Finance.fromMap(e.data() as Map<String, dynamic>))
               .toList();
 
-          // filter with given text
+          // filtering finances
           finances = finances.where((finance) {
-            final actual = finance.description.toLowerCase();
-            final input = searchText.toLowerCase();
-
-            return actual.contains(input);
-          }).toList();
-
-          // filter with given text
-          finances = finances.where((finance) {
-            final actual = finance.subType;
-
-            return actual.contains(subType);
+            return _filterFinance(finance, searchText, filter);
           }).toList();
 
           return ListView.builder(
@@ -102,8 +92,14 @@ class FinanceController extends StateNotifier {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  Text(finances[index].description),
                   const SizedBox(height: 20),
+                  Text("id: ${finances[index].id}"),
+                  Text("title: ${finances[index].title}"),
+                  Text("type: ${finances[index].type}"),
+                  Text("subType: ${finances[index].subType}"),
+                  Text("value: ${finances[index].value}"),
+                  const SizedBox(height: 20),
+                  const Divider(height: 5),
                 ],
               );
             },
@@ -120,6 +116,7 @@ class FinanceController extends StateNotifier {
   }
 }
 
+// return a feedback Snackbar
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
     String feedback, BuildContext context) {
   return ScaffoldMessenger.of(context).showSnackBar(
@@ -128,4 +125,17 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
       content: Text(feedback),
     ),
   );
+}
+
+// return true if all filtering inputs are correct
+bool _filterFinance(
+    Finance finance, String searchText, Map<String, dynamic> filter) {
+  final financeTitle = finance.title.toLowerCase();
+
+  return financeTitle.contains(searchText.toLowerCase()) &&
+      finance.type.contains(filter["type"]) &&
+      finance.subType.contains(filter["subType"]) &&
+      finance.date.contains(filter["date"]) &&
+      filter["minValue"] < finance.value &&
+      filter["maxValue"] > finance.value;
 }

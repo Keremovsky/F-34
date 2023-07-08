@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class Finance {
   final String id;
+  final String title;
   final String description;
   final String type;
   final String subType;
@@ -11,6 +12,7 @@ class Finance {
 
   Finance({
     required this.id,
+    required this.title,
     required this.description,
     required this.type,
     required this.subType,
@@ -21,6 +23,7 @@ class Finance {
   Finance copyWith({
     String? id,
     String? title,
+    String? description,
     String? type,
     String? subType,
     String? date,
@@ -28,7 +31,8 @@ class Finance {
   }) {
     return Finance(
       id: id ?? this.id,
-      description: title ?? this.description,
+      title: title ?? this.title,
+      description: description ?? this.description,
       type: type ?? this.type,
       subType: subType ?? this.subType,
       date: date ?? this.date,
@@ -39,7 +43,8 @@ class Finance {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'title': description,
+      'title': title,
+      'description': description,
       'type': type,
       'subType': subType,
       'date': date,
@@ -50,7 +55,8 @@ class Finance {
   factory Finance.fromMap(Map<String, dynamic> map) {
     return Finance(
       id: map['id'] as String,
-      description: map['title'] as String,
+      title: map['title'] as String,
+      description: map['description'] as String,
       type: map['type'] as String,
       subType: map['subType'] as String,
       date: map['date'] as String,
@@ -65,7 +71,7 @@ class Finance {
 
   @override
   String toString() {
-    return 'Finance(id: $id, title: $description, type: $type, subType: $subType, date: $date, value: $value)';
+    return 'Finance(id: $id, title: $title, description: $description, type: $type, subType: $subType, date: $date, value: $value)';
   }
 
   @override
@@ -73,6 +79,7 @@ class Finance {
     if (identical(this, other)) return true;
 
     return other.id == id &&
+        other.title == title &&
         other.description == description &&
         other.type == type &&
         other.subType == subType &&
@@ -83,6 +90,7 @@ class Finance {
   @override
   int get hashCode {
     return id.hashCode ^
+        title.hashCode ^
         description.hashCode ^
         type.hashCode ^
         subType.hashCode ^

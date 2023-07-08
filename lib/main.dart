@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
+import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/features/home/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         IncomeScreen.routeName: (context) => IncomeScreen(),
         ExpenseScreen.routeName: (context) => ExpenseScreen(),
         FinanceListScreen.routeName: (context) => FinanceListScreen(),
+        FinanceFilterScreen.routeName: (context) => FinanceFilterScreen(),
       },
     );
   }

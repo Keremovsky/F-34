@@ -1,3 +1,4 @@
+import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,7 @@ class ExpenseScreen extends ConsumerStatefulWidget {
 
 class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? description;
-  String? amount;
-  String? category;
+  String title = "", description = "", amount = "", category = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +35,15 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Title',
+                  fillColor: Palette.textFieldBackground,
+                  filled: true,
+                ),
+                onSaved: (value) => title = value!,
+              ),
+              const SizedBox(height: 16),
               const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
@@ -43,7 +51,7 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
-                onSaved: (value) => amount = value,
+                onSaved: (value) => amount = value!,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -52,7 +60,7 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
-                onSaved: (value) => description = value,
+                onSaved: (value) => description = value!,
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField(
@@ -62,57 +70,8 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                   filled: true,
                 ),
                 dropdownColor: Palette.categoryBackground,
-                items: [
-                  DropdownMenuItem(
-                      value: 'home',
-                      child: Text('Home and Living',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'food',
-                      child: Text('Food',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'Transportation',
-                      child: Text('Transportation',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'health',
-                      child: Text('Health',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'education',
-                      child: Text('Education',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'personalcare',
-                      child: Text('Personal Care and Clothing',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'entertainment',
-                      child: Text('Entertainment and Hobbies',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'travel',
-                      child: Text('Travel',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'debt',
-                      child: Text('Debt and Loan Payments',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'investments',
-                      child: Text('Insurance and Investments',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'gifts',
-                      child: Text('Gifts and Donations',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'other',
-                      child: Text('Other',
-                          style: TextStyle(color: Palette.categoryText))),
-                ],
-                onChanged: (value) => category = value as String?,
+                items: Constants.expenseTypeDropItems,
+                onChanged: (value) => category = value as String,
               ),
               const SizedBox(height: 16),
               ElevatedButton(
@@ -126,10 +85,11 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     ref.read(financeControllerProvider.notifier).addFinance(
-                          description!,
-                          category!,
+                          title,
+                          description,
+                          category,
                           "expense",
-                          double.parse(amount!),
+                          double.parse(amount),
                           context,
                         );
                   }

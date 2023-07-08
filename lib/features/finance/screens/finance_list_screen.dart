@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
+import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,38 +14,19 @@ class FinanceListScreen extends ConsumerStatefulWidget {
 }
 
 class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
-  final textController = TextEditingController();
   String textSearch = "";
-  String subType = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      drawer: FinanceFilterScreen(),
       body: Column(
         children: [
           const SizedBox(height: 50),
           const Text("PAST ACTIONS"),
           const SizedBox(height: 50),
-          DropdownButton(
-            items: const [
-              DropdownMenuItem(
-                value: "expense",
-                child: Text("Expense"),
-              ),
-              DropdownMenuItem(
-                value: "income",
-                child: Text("Income"),
-              ),
-            ],
-            onChanged: (value) {
-              setState(() {
-                subType = value!;
-              });
-            },
-          ),
-          const SizedBox(height: 50),
           TextField(
-            controller: textController,
             onChanged: (value) {
               setState(() {
                 textSearch = value;
@@ -52,9 +34,12 @@ class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
             },
           ),
           Expanded(
-            child: ref
-                .watch(financeControllerProvider.notifier)
-                .getFinanceStream(context, textSearch, subType),
+            child:
+                ref.watch(financeControllerProvider.notifier).getFinanceStream(
+                      context,
+                      textSearch,
+                      ref.watch(filterValueProvider),
+                    ),
           ),
         ],
       ),

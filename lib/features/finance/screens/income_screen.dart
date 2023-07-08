@@ -1,3 +1,4 @@
+import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,9 +14,7 @@ class IncomeScreen extends ConsumerStatefulWidget {
 
 class _IncomeScreenState extends ConsumerState<IncomeScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? amount;
-  String? description;
-  String? category;
+  String title = "", amount = "", description = "", category = "";
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +39,21 @@ class _IncomeScreenState extends ConsumerState<IncomeScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
+                  labelText: 'Title',
+                  fillColor: Palette.textFieldBackground,
+                  filled: true,
+                ),
+                onSaved: (value) => title = value!,
+              ),
+              const SizedBox(height: 16),
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: InputDecoration(
                   labelText: 'Amount',
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
-                onSaved: (value) => amount = value,
+                onSaved: (value) => amount = value!,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -53,7 +62,7 @@ class _IncomeScreenState extends ConsumerState<IncomeScreen> {
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
-                onSaved: (value) => description = value,
+                onSaved: (value) => description = value!,
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField(
@@ -63,21 +72,8 @@ class _IncomeScreenState extends ConsumerState<IncomeScreen> {
                   filled: true,
                 ),
                 dropdownColor: Palette.categoryBackground,
-                items: [
-                  DropdownMenuItem(
-                      value: 'salary',
-                      child: Text('Salary',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'freelance',
-                      child: Text('Freelance',
-                          style: TextStyle(color: Palette.categoryText))),
-                  DropdownMenuItem(
-                      value: 'personal',
-                      child: Text('Personal',
-                          style: TextStyle(color: Palette.categoryText))),
-                ],
-                onChanged: (value) => category = value as String?,
+                items: Constants.incomeTypeDropItems,
+                onChanged: (value) => category = value as String,
               ),
               const SizedBox(height: 16),
               ElevatedButton(
@@ -91,10 +87,11 @@ class _IncomeScreenState extends ConsumerState<IncomeScreen> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     ref.read(financeControllerProvider.notifier).addFinance(
-                          description!,
-                          category!,
+                          title,
+                          description,
+                          category,
                           "income",
-                          double.parse(amount!),
+                          double.parse(amount),
                           context,
                         );
                   }

@@ -2,7 +2,6 @@ import 'package:bootcamp_flutter/core/providers/firebase_providers.dart';
 import 'package:bootcamp_flutter/models/finance.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fpdart/fpdart.dart';
 import '../../auth/controller/auth_controller.dart';
 
 final financeRepositoryProvider = Provider((ref) => FinanceRepository(
@@ -23,8 +22,8 @@ class FinanceRepository {
 
   CollectionReference get _users => _firestore.collection("users");
 
-  Future<bool> addFinance(
-      String description, String type, String subType, double value) async {
+  Future<bool> addFinance(String title, String description, String type,
+      String subType, double value) async {
     DateTime now = DateTime.now();
     String date = now.toString().substring(0, 10);
 
@@ -32,6 +31,7 @@ class FinanceRepository {
       // create new finance
       Finance newFinance = Finance(
         id: now.toString(),
+        title: title,
         description: description,
         type: type,
         subType: subType,
