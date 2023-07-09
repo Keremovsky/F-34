@@ -30,8 +30,8 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return Drawer(
-      child: Form(
+    return Scaffold(
+      body: Form(
         child: Column(
           children: [
             Padding(
@@ -99,8 +99,8 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
                           "minValue": minValue ?? 0,
                           "maxValue": maxValue ?? double.maxFinite,
                         });
-
-                print(ref.read(filterValueProvider));
+                Future.delayed(const Duration(milliseconds: 500))
+                    .then((value) => Navigator.of(context).pop());
               },
               child: const Text("Filter"),
             ),

@@ -1,5 +1,7 @@
+import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
+import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,20 +20,49 @@ class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(),
-      drawer: FinanceFilterScreen(),
+      backgroundColor: Palette.background,
       body: Column(
         children: [
-          const SizedBox(height: 50),
-          const Text("PAST ACTIONS"),
-          const SizedBox(height: 50),
-          TextField(
-            onChanged: (value) {
-              setState(() {
-                textSearch = value;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 40.0),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: width * 0.6,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Search with title',
+                      fillColor: Palette.textFieldBackground,
+                      filled: true,
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        textSearch = value;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(width: width * 0.05),
+                Container(
+                  height: 55,
+                  width: 110,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(FinanceFilterScreen.routeName);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    child: const Text("Filter"),
+                  ),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child:
