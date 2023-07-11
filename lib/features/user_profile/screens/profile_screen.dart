@@ -4,7 +4,7 @@ import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../core/constants/constants.dart';
+import '../../../core/constants/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   static final routeName = "/profileScreen";

@@ -35,8 +35,9 @@ class FinanceController extends StateNotifier {
     }
   }
 
-  void removeFinance(String id, BuildContext context) async {
-    final control = await _financeRepository.removeFinance(id);
+  void removeFinance(
+      BuildContext context, String id, String subType, double value) async {
+    final control = await _financeRepository.removeFinance(id, subType, value);
 
     if (control == false) {
       if (mounted) _giveFeedback("Failure", context);

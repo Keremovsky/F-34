@@ -1,4 +1,4 @@
-import 'package:bootcamp_flutter/features/home/profile_screen.dart';
+import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';

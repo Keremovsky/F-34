@@ -61,7 +61,8 @@ class FinanceBlock extends ConsumerWidget {
                       onPressed: () {
                         ref
                             .read(financeControllerProvider.notifier)
-                            .removeFinance(_finance.id, context);
+                            .removeFinance(context, _finance.id,
+                                _finance.subType, _finance.value);
                       },
                       icon: const Icon(
                         Icons.delete_forever,

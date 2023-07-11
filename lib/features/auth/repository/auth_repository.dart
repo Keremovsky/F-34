@@ -2,6 +2,7 @@ import 'package:bootcamp_flutter/core/providers/firebase_providers.dart';
 import 'package:bootcamp_flutter/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -62,7 +63,7 @@ class AuthRepository {
       return right(userModel);
     } on FirebaseAuthException catch (e) {
       // if it fails
-      print(e.toString());
+      debugPrint(e.toString());
       return left(e.toString());
     }
   }
@@ -80,7 +81,7 @@ class AuthRepository {
       return right(userModel);
     } on FirebaseAuthException catch (e) {
       // if it fails
-      print(e.toString());
+      debugPrint(e.toString());
       return left(e.toString());
     }
   }
@@ -107,7 +108,7 @@ class AuthRepository {
       return true;
     } catch (e) {
       // if it fail
-      print(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }
