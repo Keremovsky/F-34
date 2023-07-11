@@ -61,13 +61,13 @@ class FinanceRepository {
     }
   }
 
-  Future<bool> updateFinance(
-      Finance finance, String? title, String? type, double? value) async {
+  Future<bool> updateFinance(Finance finance, String? title,
+      String? description, double? value) async {
     try {
       // update finance
       finance = finance.copyWith(
         title: title,
-        type: type,
+        description: description,
         value: value,
       );
 

@@ -35,6 +35,7 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Title',

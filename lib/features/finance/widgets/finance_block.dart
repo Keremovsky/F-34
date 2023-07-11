@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
+import 'package:bootcamp_flutter/features/finance/widgets/update_finance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -48,7 +49,9 @@ class FinanceBlock extends ConsumerWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        updateExpensePopUp(context, ref, _finance);
+                      },
                       icon: const Icon(
                         Icons.update_sharp,
                         color: Colors.amber,

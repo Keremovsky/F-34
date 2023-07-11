@@ -45,7 +45,7 @@ class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
                   ),
                 ),
                 SizedBox(width: width * 0.05),
-                Container(
+                SizedBox(
                   height: 55,
                   width: 110,
                   child: ElevatedButton(

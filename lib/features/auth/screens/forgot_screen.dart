@@ -59,7 +59,8 @@ class _ForgotScreenState extends ConsumerState<ForgotScreen> {
                     child: TextFormField(
                       onSaved: (value) => email = value!,
                       validator: RequiredValidator(
-                          errorText: 'Please enter your email!'),
+                        errorText: 'Please enter your email!',
+                      ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(

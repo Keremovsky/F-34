@@ -2,7 +2,6 @@ import 'package:bootcamp_flutter/features/finance/repository/finance_repository.
 import 'package:bootcamp_flutter/features/finance/widgets/finance_block.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fpdart/fpdart.dart';
 import '../../../models/finance.dart';
 
 final financeControllerProvider = StateNotifierProvider(
@@ -26,7 +25,7 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(seconds: 1))
+        Future.delayed(const Duration(milliseconds: 700))
             .then((value) => Navigator.of(context).pop());
       }
     } else {
@@ -38,17 +37,21 @@ class FinanceController extends StateNotifier {
 
   void removeFinance(String id, BuildContext context) async {
     final control = await _financeRepository.removeFinance(id);
+
+    if (control == false) {
+      if (mounted) _giveFeedback("Failure", context);
+    }
   }
 
-  void updateFinance(Finance finance, String? title, String? type,
+  void updateFinance(Finance finance, String? title, String? description,
       double? value, BuildContext context) async {
-    final control =
-        await _financeRepository.updateFinance(finance, title, type, value);
+    final control = await _financeRepository.updateFinance(
+        finance, title, description, value);
 
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(seconds: 1))
+        Future.delayed(const Duration(milliseconds: 700))
             .then((value) => Navigator.of(context).pop());
       }
     } else {
@@ -75,7 +78,7 @@ class FinanceController extends StateNotifier {
             return const SizedBox(
               height: 200,
               width: 200,
-              child: Text("No Finance Data :("),
+              child: Center(child: Text("No Finance Data :(")),
             );
           }
 
@@ -98,10 +101,10 @@ class FinanceController extends StateNotifier {
             },
           );
         } else {
-          return Container(
+          return const SizedBox(
             height: 200,
             width: 200,
-            child: const CircularProgressIndicator(),
+            child: CircularProgressIndicator(),
           );
         }
       },

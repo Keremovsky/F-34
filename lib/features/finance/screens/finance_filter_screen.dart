@@ -31,7 +31,7 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
   double? _minValue, _maxValue;
 
   // type item list
-  List<DropdownMenuItem> currentItems =
+  List<DropdownMenuItem> _currentItems =
       Constants.expenseTypeDropItems + Constants.incomeTypeDropItems;
 
   @override
@@ -112,11 +112,11 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
                   _subType = value;
 
                   if (_subType == "income") {
-                    currentItems = Constants.incomeTypeDropItems;
+                    _currentItems = Constants.incomeTypeDropItems;
                   } else if (_subType == "expense") {
-                    currentItems = Constants.expenseTypeDropItems;
+                    _currentItems = Constants.expenseTypeDropItems;
                   } else {
-                    currentItems = Constants.expenseTypeDropItems +
+                    _currentItems = Constants.expenseTypeDropItems +
                         Constants.incomeTypeDropItems;
                   }
                 }),
@@ -132,11 +132,12 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
-                items: currentItems,
+                items: _currentItems,
                 onChanged: (value) => _type = value,
               ),
             ),
             _customSizedBox(),
+            // select month
             ElevatedButton(
               onPressed: () {
                 showMonthPicker(
@@ -152,7 +153,7 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
                   }
                 });
               },
-              child: Text("Select Month"),
+              child: const Text("Select Month"),
             ),
             const SizedBox(height: 50),
             // button to apply filters
@@ -173,7 +174,7 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
                           "minValue": _minValue ?? 0,
                           "maxValue": _maxValue ?? double.maxFinite,
                         });
-                print(ref.read(filterValueProvider));
+                debugPrint(ref.read(filterValueProvider).toString());
                 Future.delayed(const Duration(milliseconds: 400))
                     .then((value) => Navigator.of(context).pop());
               },
