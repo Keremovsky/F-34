@@ -44,7 +44,6 @@ class _ExpenseScreenState extends ConsumerState<ExpenseScreen> {
                 onSaved: (value) => title = value!,
               ),
               const SizedBox(height: 16),
-              const SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Amount',

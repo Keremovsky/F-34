@@ -33,7 +33,13 @@ class FinanceBlock extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 20),
-            Text(_finance.description),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(_finance.description),
+                Text(_finance.type),
+              ],
+            ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,9 +48,7 @@ class FinanceBlock extends ConsumerWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        print("ur mom updated");
-                      },
+                      onPressed: () {},
                       icon: const Icon(
                         Icons.update_sharp,
                         color: Colors.amber,

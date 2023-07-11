@@ -101,7 +101,7 @@ class FinanceController extends StateNotifier {
           return Container(
             height: 200,
             width: 200,
-            child: CircularProgressIndicator(),
+            child: const CircularProgressIndicator(),
           );
         }
       },
