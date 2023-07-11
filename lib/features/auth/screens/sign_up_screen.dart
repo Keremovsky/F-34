@@ -169,6 +169,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                     ),
                     const SizedBox(height: 92),
                     const SizedBox(height: 50),
+                    Container(
                       width: MediaQuery.of(context).size.height.w,
                       child: ElevatedButton(
                         onPressed: () async {
