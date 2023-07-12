@@ -6,7 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ForgotScreen extends ConsumerStatefulWidget {
-  static final routeName = "/forgotScreen";
+  static const routeName = "/forgotScreen";
 
   const ForgotScreen({super.key});
 

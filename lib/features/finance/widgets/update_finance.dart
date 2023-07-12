@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future updateExpensePopUp(
     BuildContext context, WidgetRef ref, Finance finance) {
-  late String _title, _description;
-  late double _value;
+  late String title, description;
+  late double money;
 
   final _key = GlobalKey<FormState>();
 
@@ -22,7 +22,7 @@ Future updateExpensePopUp(
               child: Column(
                 children: [
                   TextFormField(
-                    onSaved: (value) => _title = value!,
+                    onSaved: (value) => title = value!,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "It is Empty";
@@ -33,7 +33,7 @@ Future updateExpensePopUp(
                     initialValue: finance.title,
                   ),
                   TextFormField(
-                    onSaved: (value) => _description = value!,
+                    onSaved: (value) => description = value!,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "It is Empty";
@@ -44,12 +44,13 @@ Future updateExpensePopUp(
                     initialValue: finance.description,
                   ),
                   TextFormField(
-                    onSaved: (value) => _value = double.parse(value!),
+                    onSaved: (value) => money = double.parse(value!),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "It is Empty";
+                      } else if (double.tryParse(value) == null) {
+                        return "Please just insert number!";
                       }
-                      return null;
                     },
                     decoration: const InputDecoration(hintText: "Value"),
                     initialValue: finance.value.toString(),
@@ -61,7 +62,7 @@ Future updateExpensePopUp(
                         ref
                             .read(financeControllerProvider.notifier)
                             .updateFinance(
-                                finance, _title, _description, _value, context);
+                                finance, title, description, money, context);
                       }
                     },
                     child: const Text("Update Finance"),

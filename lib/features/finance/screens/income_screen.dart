@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../controller/finance_controller.dart';
 
 class IncomeScreen extends ConsumerStatefulWidget {
-  static final routeName = "/incomeScreen";
+  static const routeName = "/incomeScreen";
 
   @override
   _IncomeScreenState createState() => _IncomeScreenState();

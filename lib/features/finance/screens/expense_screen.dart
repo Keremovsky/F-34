@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ExpenseScreen extends ConsumerStatefulWidget {
-  static final routeName = "/expenseScreen";
+  static const routeName = "/expenseScreen";
 
   @override
   _ExpenseScreenState createState() => _ExpenseScreenState();

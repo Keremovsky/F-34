@@ -6,10 +6,8 @@ import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../repository/auth_repository.dart';
-
 class LoginScreen extends ConsumerStatefulWidget {
-  static final routeName = "/loginScreen";
+  static const routeName = "/loginScreen";
 
   const LoginScreen({super.key});
 
@@ -130,6 +128,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                   onPressed: () async {
                     final password = passwordController.text;
                     final email = emailController.text;
+
                     ref
                         .read(authControllerProvider.notifier)
                         .signInWithMail(email, password, context);

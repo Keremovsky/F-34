@@ -8,7 +8,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import '../controller/auth_controller.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
-  static final routeName = "/signUpScreen";
+  static const routeName = "/signUpScreen";
 
   const SignUpScreen({Key? key}) : super(key: key);
 

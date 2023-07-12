@@ -16,7 +16,7 @@ final filterValueProvider =
         });
 
 class FinanceFilterScreen extends ConsumerStatefulWidget {
-  static final routeName = "/financeFilterScreen";
+  static const routeName = "/financeFilterScreen";
 
   const FinanceFilterScreen({super.key});
 

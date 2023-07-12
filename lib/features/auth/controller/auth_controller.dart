@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bootcamp_flutter/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,13 +29,7 @@ class AuthController extends StateNotifier<bool> {
 
     control.fold((l) {
       // give feedback to user that process is not finished with success
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(l),
-          ),
-        );
+      if (mounted) _giveFeedback("Couldn't sign in.", context);
     }, (r) {
       // update user provider
       _ref.read(userProvider.notifier).update((state) => r);
@@ -55,13 +48,7 @@ class AuthController extends StateNotifier<bool> {
 
     control.fold((l) {
       // give feedback to user that process is not finished with success
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(l),
-          ),
-        );
+      if (mounted) _giveFeedback("Couldn't sign in.", context);
     }, (r) {
       // update user provider
       _ref.read(userProvider.notifier).update((state) => r);
@@ -76,43 +63,34 @@ class AuthController extends StateNotifier<bool> {
     final control = await _authRepository.signUpWithMail(email, password, name);
 
     if (control == true) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text("Sign up is successful."),
-          ),
-        );
+      if (mounted) {
+        if (mounted) _giveFeedback("Sign up is successful.", context);
+      }
     } else {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text("Sign up is not successful."),
-          ),
-        );
+      if (mounted) {
+        if (mounted) _giveFeedback("Sign up is not successful.", context);
+      }
     }
   }
 
   void forgotPassword(String email, BuildContext context) async {
-    final control = _authRepository.forgotPassword(email);
+    final control = await _authRepository.forgotPassword(email);
 
-    if (control == true) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text("Please check your email."),
-          ),
-        );
+    if (control) {
+      if (mounted) _giveFeedback("Please check your email.", context);
     } else {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text("Password reset process failed."),
-          ),
-        );
+      if (mounted) _giveFeedback("Password reset process failed.", context);
     }
   }
+}
+
+// return a feedback Snackbar
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
+    String feedback, BuildContext context) {
+  return ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: const Duration(seconds: 1),
+      content: Text(feedback),
+    ),
+  );
 }

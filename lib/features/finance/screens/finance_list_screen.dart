@@ -1,4 +1,3 @@
-import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FinanceListScreen extends ConsumerStatefulWidget {
-  static final routeName = "/financeListScreen";
+  static const routeName = "/financeListScreen";
 
   const FinanceListScreen({super.key});
 
