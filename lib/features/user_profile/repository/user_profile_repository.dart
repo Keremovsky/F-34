@@ -37,4 +37,23 @@ class UserProfileRepository {
       return false;
     }
   }
+
+  Future<bool> updateUserProfile(String name, String email) async {
+    try {
+      var user = _ref.read(userProvider)!;
+      // change user with given inputs
+      user = user.copyWith(name: name, email: email);
+
+      // update user provider
+      _ref.read(userProvider.notifier).update((state) => user);
+
+      // update user on firebase database
+      _user.update(user.toMap());
+
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
 }

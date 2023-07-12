@@ -17,4 +17,26 @@ class UserProfileController extends StateNotifier {
   void updateUserMoney(double value) async {
     await _userProfileRepository.updateUserMoney(value);
   }
+
+  void updateUserProfile(
+      BuildContext context, String name, String email) async {
+    final control = await _userProfileRepository.updateUserProfile(name, email);
+
+    if (control) {
+      if (mounted) _giveFeedback("Success", context);
+    } else {
+      if (mounted) _giveFeedback("Failure", context);
+    }
+  }
+}
+
+// return a feedback Snackbar
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
+    String feedback, BuildContext context) {
+  return ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: const Duration(seconds: 1),
+      content: Text(feedback),
+    ),
+  );
 }

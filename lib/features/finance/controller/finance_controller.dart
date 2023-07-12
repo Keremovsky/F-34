@@ -52,7 +52,7 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(milliseconds: 700))
+        Future.delayed(const Duration(milliseconds: 1))
             .then((value) => Navigator.of(context).pop());
       }
     } else {
