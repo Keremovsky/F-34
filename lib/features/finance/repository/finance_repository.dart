@@ -19,8 +19,10 @@ class FinanceRepository {
       : _firestore = firestore,
         _ref = ref;
 
+  // users collection
   CollectionReference get _users => _firestore.collection("users");
 
+  // finances collection
   CollectionReference get _finances =>
       _firestore.collection("users/${_ref.read(userProvider)!.uid}/finances");
 
