@@ -31,18 +31,7 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 90,),
-              Container(
-                child: Text(
-                  'Automated Actions',
-                  style: TextStyle(
-                    color: Palette.buttonText,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              SizedBox(height: 65,),
+              SizedBox(height: 120,),
               Container(
                 height: 62,
                 child: TextFormField(
@@ -58,6 +47,24 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
                     filled: true,
                   ),
                   onSaved: (value) => amount = value as Double?,
+                ),
+              ),
+              SizedBox(height: 20,),
+              Container(
+                height: 62,
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    labelText: "Description",
+                    labelStyle: TextStyle(
+                      color: Palette.textFieldText,
+                      fontSize: 20,
+                    ),
+                    fillColor: Palette.textFieldBackground,
+                    filled: true,
+                  ),
+                  onSaved: (value) => description = value,
                 ),
               ),
               SizedBox(height: 20,),
@@ -104,24 +111,6 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
                     : action == 'income'
                         ? incomeOption()
                         : nullOption(),
-              ),
-              SizedBox(height: 20,),
-              Container(
-                height: 62,
-                child: TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    labelText: "Description",
-                    labelStyle: TextStyle(
-                      color: Palette.textFieldText,
-                      fontSize: 20,
-                    ),
-                    fillColor: Palette.textFieldBackground,
-                    filled: true,
-                  ),
-                  onSaved: (value) => description = value,
-                ),
               ),
               SizedBox(height: 20,),
               Container(

@@ -1,9 +1,9 @@
 import 'package:bootcamp_flutter/core/constants/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:bootcamp_flutter/themes/palette.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
+import 'package:bootcamp_flutter/themes/palette.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -169,6 +169,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                     ),
                     const SizedBox(height: 92),
                     const SizedBox(height: 50),
+                    Container(
                       width: MediaQuery.of(context).size.height.w,
                       child: ElevatedButton(
                         onPressed: () async {
