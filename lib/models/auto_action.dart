@@ -2,22 +2,26 @@
 import 'dart:convert';
 
 class AutoAction {
+  String id;
   String day;
   String lastUpdate;
   double value;
 
   AutoAction({
+    required this.id,
     required this.day,
     required this.lastUpdate,
     required this.value,
   });
 
   AutoAction copyWith({
+    String? id,
     String? day,
     String? lastUpdate,
     double? value,
   }) {
     return AutoAction(
+      id: id ?? this.id,
       day: day ?? this.day,
       lastUpdate: lastUpdate ?? this.lastUpdate,
       value: value ?? this.value,
@@ -26,6 +30,7 @@ class AutoAction {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'day': day,
       'lastUpdate': lastUpdate,
       'value': value,
@@ -34,6 +39,7 @@ class AutoAction {
 
   factory AutoAction.fromMap(Map<String, dynamic> map) {
     return AutoAction(
+      id: map['id'] as String,
       day: map['day'] as String,
       lastUpdate: map['lastUpdate'] as String,
       value: map['value'] as double,
@@ -46,18 +52,22 @@ class AutoAction {
       AutoAction.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'AutoAction(day: $day, lastUpdate: $lastUpdate, value: $value)';
+  String toString() {
+    return 'AutoAction(id: $id, day: $day, lastUpdate: $lastUpdate, value: $value)';
+  }
 
   @override
   bool operator ==(covariant AutoAction other) {
     if (identical(this, other)) return true;
 
-    return other.day == day &&
+    return other.id == id &&
+        other.day == day &&
         other.lastUpdate == lastUpdate &&
         other.value == value;
   }
 
   @override
-  int get hashCode => day.hashCode ^ lastUpdate.hashCode ^ value.hashCode;
+  int get hashCode {
+    return id.hashCode ^ day.hashCode ^ lastUpdate.hashCode ^ value.hashCode;
+  }
 }

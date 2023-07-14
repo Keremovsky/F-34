@@ -1,21 +1,23 @@
 import 'dart:io';
+import 'package:bootcamp_flutter/features/automated_actions/controller/auto_action_controller.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/constants/constants.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   static final routeName = "/profileScreen";
 
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   File? _image;
 
   Future<void> _pickImage() async {
@@ -130,9 +132,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text(
                         "Automated Actions",
                         style: TextStyle(
-                            color: Palette.buttonText,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                          color: Palette.buttonText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       )),
                 ),
               ),

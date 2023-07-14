@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import '../automated_actions/controller/auto_action_controller.dart';
 import '../finance/screens/expense_screen.dart';
 import '../finance/screens/income_screen.dart';
 
@@ -30,6 +31,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // control and perform all automated actions when user sign in
+    ref.read(autoActionControllerProvider.notifier).performAutoAction();
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:bootcamp_flutter/features/automated%20actions/repository/auto_action_repository.dart';
+import 'package:bootcamp_flutter/features/automated_actions/repository/auto_action_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,6 +22,10 @@ class AutoActionController extends StateNotifier {
     } else {
       if (mounted) _giveFeedback("Failure", context);
     }
+  }
+
+  void performAutoAction() async {
+    await _autoActionRepository.performAutoActions();
   }
 }
 
