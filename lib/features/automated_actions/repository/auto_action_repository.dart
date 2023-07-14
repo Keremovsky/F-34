@@ -22,7 +22,8 @@ class AutoActionRepository {
   CollectionReference get _autoActions => _firestore
       .collection("users/${_ref.read(userProvider)!.uid}/autoActions");
 
-  Future<bool> createAutoAction(String day, double value) async {
+  Future<bool> createAutoAction(String title, String description,
+      String subType, String type, String day, double value) async {
     try {
       DateTime now = DateTime.now();
       final lastUpdate =
@@ -31,12 +32,27 @@ class AutoActionRepository {
 
       AutoAction autoAction = AutoAction(
         id: now.toString(),
+        title: title,
+        description: description,
         day: day,
         lastUpdate: lastUpdate,
+        subType: subType,
+        type: type,
         value: value,
       );
 
       _autoActions.doc(now.toString()).set(autoAction.toMap());
+
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> removeAutoAction(String id) async {
+    try {
+      await _autoActions.doc(id).delete();
 
       return true;
     } catch (e) {

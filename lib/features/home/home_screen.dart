@@ -32,7 +32,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     // control and perform all automated actions when user sign in
-    ref.read(autoActionControllerProvider.notifier).performAutoAction();
+    ref.read(autoActionControllerProvider.notifier).performAutoActions();
   }
 
   @override

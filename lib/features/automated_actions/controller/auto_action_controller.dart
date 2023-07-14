@@ -14,8 +14,16 @@ class AutoActionController extends StateNotifier {
       : _autoActionRepository = autoActionRepository,
         super(false);
 
-  void createAutoAction(BuildContext context, String day, double value) async {
-    final control = await _autoActionRepository.createAutoAction(day, value);
+  Future<void> createAutoAction(
+      BuildContext context,
+      String title,
+      String description,
+      String subType,
+      String type,
+      String day,
+      double value) async {
+    final control = await _autoActionRepository.createAutoAction(
+        title, description, subType, type, day, value);
 
     if (control) {
       if (mounted) _giveFeedback("Success", context);
@@ -24,7 +32,17 @@ class AutoActionController extends StateNotifier {
     }
   }
 
-  void performAutoAction() async {
+  Future<void> removeAutoAction(BuildContext context, String id) async {
+    final control = await _autoActionRepository.removeAutoAction(id);
+
+    if (control) {
+      if (mounted) _giveFeedback("Success", context);
+    } else {
+      if (mounted) _giveFeedback("Failure", context);
+    }
+  }
+
+  Future<void> performAutoActions() async {
     await _autoActionRepository.performAutoActions();
   }
 }
