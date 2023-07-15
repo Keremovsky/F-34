@@ -11,6 +11,7 @@ import 'features/auth/screens/sign_up_screen.dart';
 import 'features/finance/screens/expense_screen.dart';
 import 'features/finance/screens/income_screen.dart';
 import 'features/home/home_screen.dart';
+import 'features/home/save_up_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
