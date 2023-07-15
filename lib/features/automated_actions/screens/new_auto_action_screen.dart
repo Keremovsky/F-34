@@ -1,22 +1,29 @@
-import 'dart:ffi';
+import 'package:bootcamp_flutter/core/constants/constants.dart';
+import 'package:bootcamp_flutter/features/automated_actions/controller/auto_action_controller.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AutomatedActionsScreen extends StatefulWidget {
-  const AutomatedActionsScreen({super.key});
+class CreateAutomatedActionScreen extends ConsumerStatefulWidget {
+  static const routeName = "/automatedActionsScreen";
+
+  const CreateAutomatedActionScreen({super.key});
 
   @override
-  State<AutomatedActionsScreen> createState() =>
+  ConsumerState<CreateAutomatedActionScreen> createState() =>
       __AutomatedActionsScreenStateState();
 }
 
-class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
+class __AutomatedActionsScreenStateState
+    extends ConsumerState<CreateAutomatedActionScreen> {
   final _formKey = GlobalKey<FormState>();
-  Double? amount;
+
+  String? title;
+  double? amount;
   String? action;
-  String? category;
+  String? category = "???";
   String? description;
-  String? frequency;
+  String? day;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +36,27 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 120,
+              const SizedBox(height: 120),
+              Container(
+                height: 62,
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    labelText: "Title",
+                    labelStyle: TextStyle(
+                      color: Palette.textFieldText,
+                      fontSize: 20,
+                    ),
+                    fillColor: Palette.textFieldBackground,
+                    filled: true,
+                  ),
+                  onChanged: (value) => setState(() {
+                    title = value;
+                  }),
+                ),
               ),
+              const SizedBox(height: 20),
               Container(
                 height: 62,
                 child: TextFormField(
@@ -46,12 +71,12 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
                     fillColor: Palette.textFieldBackground,
                     filled: true,
                   ),
-                  onSaved: (value) => amount = value as Double?,
+                  onChanged: (value) => setState(() {
+                    amount = double.parse(value);
+                  }),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Container(
                 height: 62,
                 child: TextFormField(
@@ -66,12 +91,12 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
                     fillColor: Palette.textFieldBackground,
                     filled: true,
                   ),
-                  onSaved: (value) => description = value,
+                  onChanged: (value) => setState(() {
+                    description = value;
+                  }),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Container(
                 height: 62,
                 decoration: BoxDecoration(
@@ -106,7 +131,7 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -114,68 +139,63 @@ class __AutomatedActionsScreenStateState extends State<AutomatedActionsScreen> {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: action == 'expense'
-                    ? expenseOption()
+                    ? const expenseOption()
                     : action == 'income'
-                        ? incomeOption()
-                        : nullOption(),
+                        ? const incomeOption()
+                        : const nullOption(),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Container(
                 height: 62,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                child: DropdownButtonFormField(
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: 'Frequency',
+                    border: InputBorder.none,
+                    labelText: "Day",
                     labelStyle: TextStyle(
                       color: Palette.textFieldText,
                       fontSize: 20,
                     ),
                     fillColor: Palette.textFieldBackground,
                     filled: true,
-                    border: InputBorder.none,
                   ),
-                  dropdownColor: Palette.categoryBackground,
-                  items: [
-                    DropdownMenuItem(
-                        value: 'monthly',
-                        child: Text('Monthly',
-                            style: TextStyle(color: Palette.categoryText))),
-                    DropdownMenuItem(
-                        value: 'weekly',
-                        child: Text('Weekly',
-                            style: TextStyle(color: Palette.categoryText))),
-                  ],
-                  onChanged: (value) => frequency = value as String?,
+                  onChanged: (value) => setState(() {
+                    day = value;
+                  }),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Container(
                   width: double.infinity,
                   child: RawMaterialButton(
-                      fillColor: Palette.buttonBackground,
-                      elevation: 0.0,
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                        }
-                      },
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(
-                            color: Palette.buttonText,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      )),
+                    fillColor: Palette.buttonBackground,
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {
+                      ref
+                          .read(autoActionControllerProvider.notifier)
+                          .createAutoAction(
+                            context,
+                            title!,
+                            description!,
+                            action!,
+                            category!,
+                            day!,
+                            amount!,
+                          );
+                    },
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(
+                          color: Palette.buttonText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -211,56 +231,7 @@ class _expenceOptionState extends State<expenseOption> {
           border: InputBorder.none,
         ),
         dropdownColor: Palette.categoryBackground,
-        items: [
-          DropdownMenuItem(
-              value: 'home',
-              child: Text('Home and Living',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'food',
-              child:
-                  Text('Food', style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'Transportation',
-              child: Text('Transportation',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'health',
-              child: Text('Health',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'education',
-              child: Text('Education',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'personalcare',
-              child: Text('Personal Care and Clothing',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'entertainment',
-              child: Text('Entertainment and Hobbies',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'travel',
-              child: Text('Travel',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'debt',
-              child: Text('Debt and Loan Payments',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'investments',
-              child: Text('Insurance and Investments',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'gifts',
-              child: Text('Gifts and Donations',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'other',
-              child:
-                  Text('Other', style: TextStyle(color: Palette.categoryText))),
-        ],
+        items: Constants.expenseTypeDropItems,
         onChanged: (value) => category = value as String?,
       ),
     );
@@ -292,20 +263,7 @@ class _incomeOptionState extends State<incomeOption> {
           border: InputBorder.none,
         ),
         dropdownColor: Palette.categoryBackground,
-        items: [
-          DropdownMenuItem(
-              value: 'salary',
-              child: Text('Salary',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'freelance',
-              child: Text('Freelance',
-                  style: TextStyle(color: Palette.categoryText))),
-          DropdownMenuItem(
-              value: 'personal',
-              child: Text('Personal',
-                  style: TextStyle(color: Palette.categoryText))),
-        ],
+        items: Constants.incomeTypeDropItems,
         onChanged: (value) => category = value as String?,
       ),
     );

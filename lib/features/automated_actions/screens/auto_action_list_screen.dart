@@ -1,20 +1,21 @@
-import 'package:bootcamp_flutter/features/finance/controller/finance_controller.dart';
-import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
-import 'package:bootcamp_flutter/themes/palette.dart';
+import 'package:bootcamp_flutter/features/automated_actions/controller/auto_action_controller.dart';
+import 'package:bootcamp_flutter/features/automated_actions/screens/auto_action_filter_screen.dart';
+import 'package:bootcamp_flutter/features/automated_actions/screens/new_auto_action_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../themes/palette.dart';
 
-class FinanceListScreen extends ConsumerStatefulWidget {
-  static const routeName = "/financeListScreen";
+class AutoActionListScreen extends ConsumerStatefulWidget {
+  static const routeName = "/autoActionListScreen";
 
-  const FinanceListScreen({super.key});
+  const AutoActionListScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _FinanceListScreenState();
+      _AutoActionListScreenState();
 }
 
-class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
+class _AutoActionListScreenState extends ConsumerState<AutoActionListScreen> {
   String textSearch = "";
 
   @override
@@ -50,7 +51,7 @@ class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context)
-                          .pushNamed(FinanceFilterScreen.routeName);
+                          .pushNamed(AutoActionFilterScreen.routeName);
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -64,13 +65,38 @@ class _FinanceListScreenState extends ConsumerState<FinanceListScreen> {
             ),
           ),
           Expanded(
-            child:
-                ref.watch(financeControllerProvider.notifier).getFinanceStream(
-                      context,
-                      textSearch,
-                      ref.watch(financeFilterValueProvider),
-                    ),
+            child: ref
+                .watch(autoActionControllerProvider.notifier)
+                .getAutoActionStream(
+                  context,
+                  textSearch,
+                  ref.watch(autoActionFilterValueProvider),
+                ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Palette.buttonBackground,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(CreateAutomatedActionScreen.routeName);
+                },
+                child: Text(
+                  "Add new automated action",
+                  style: TextStyle(
+                      color: Palette.buttonText,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
         ],
       ),
     );

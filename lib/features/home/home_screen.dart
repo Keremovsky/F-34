@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import '../auth/controller/auth_controller.dart';
 import '../automated_actions/controller/auto_action_controller.dart';
 import '../finance/screens/expense_screen.dart';
 import '../finance/screens/income_screen.dart';
@@ -174,7 +175,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                 color: Palette.textFieldBackground,
               ),
               child: Text(
-                "Avaliable in Wallet\n...... TL",
+                "Avaliable in Wallet\n${ref.watch(userProvider)!.money.toString()} TL",
                 style: TextStyle(color: Colors.black, fontSize: 25.sp),
               ),
             ),

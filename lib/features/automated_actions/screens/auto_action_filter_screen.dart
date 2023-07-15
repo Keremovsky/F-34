@@ -1,33 +1,32 @@
-import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+
+import '../../../core/constants/constants.dart';
 import '../../../themes/palette.dart';
 
-final financeFilterValueProvider =
+final autoActionFilterValueProvider =
     StateProvider<Map<String, dynamic>>((ref) => <String, dynamic>{
           "type": "",
           "subType": "",
-          "date": "",
           "minValue": 0,
           "maxValue": double.maxFinite,
         });
 
-class FinanceFilterScreen extends ConsumerStatefulWidget {
-  static const routeName = "/financeFilterScreen";
+class AutoActionFilterScreen extends ConsumerStatefulWidget {
+  static const routeName = "/autoActionFilterScreen";
 
-  const FinanceFilterScreen({super.key});
+  const AutoActionFilterScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _FinanceFilterScreenState();
 }
 
-class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
+class _FinanceFilterScreenState extends ConsumerState<AutoActionFilterScreen> {
   // filter elements
-  String? _type, _subType, _date;
+  String? _type, _subType;
   double? _minValue, _maxValue;
 
   // type item list
@@ -94,7 +93,7 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
               width: width * 0.9,
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
-                  labelText: 'Finance Type',
+                  labelText: 'Automated Action Type',
                   fillColor: Palette.textFieldBackground,
                   filled: true,
                 ),
@@ -136,25 +135,6 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
                 onChanged: (value) => _type = value,
               ),
             ),
-            _customSizedBox(),
-            // select month
-            ElevatedButton(
-              onPressed: () {
-                showMonthPicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2023),
-                  lastDate: DateTime(2050),
-                ).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _date = value.toString().substring(0, 7);
-                    });
-                  }
-                });
-              },
-              child: const Text("Select Month"),
-            ),
             const SizedBox(height: 50),
             // button to apply filters
             ElevatedButton(
@@ -166,15 +146,14 @@ class _FinanceFilterScreenState extends ConsumerState<FinanceFilterScreen> {
               ),
               onPressed: () {
                 ref
-                    .read(financeFilterValueProvider.notifier)
+                    .read(autoActionFilterValueProvider.notifier)
                     .update((state) => <String, dynamic>{
                           "type": _type ?? "",
                           "subType": _subType ?? "",
-                          "date": _date ?? "",
                           "minValue": _minValue ?? 0,
                           "maxValue": _maxValue ?? double.maxFinite,
                         });
-                debugPrint(ref.read(financeFilterValueProvider).toString());
+                debugPrint(ref.read(autoActionFilterValueProvider).toString());
                 Future.delayed(const Duration(milliseconds: 400))
                     .then((value) => Navigator.of(context).pop());
               },

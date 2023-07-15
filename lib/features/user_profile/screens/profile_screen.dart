@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:bootcamp_flutter/features/automated_actions/controller/auto_action_controller.dart';
+import 'package:bootcamp_flutter/features/automated_actions/screens/auto_action_list_screen.dart';
+import 'package:bootcamp_flutter/features/automated_actions/screens/new_auto_action_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
@@ -123,20 +125,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 child: Container(
                   width: double.infinity,
                   child: RawMaterialButton(
-                      fillColor: Palette.textFieldBackground,
-                      elevation: 0.0,
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      onPressed: () {},
-                      child: Text(
-                        "Automated Actions",
-                        style: TextStyle(
-                          color: Palette.buttonText,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
+                    fillColor: Palette.textFieldBackground,
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(AutoActionListScreen.routeName);
+                    },
+                    child: Text(
+                      "Automated Actions",
+                      style: TextStyle(
+                        color: Palette.buttonText,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ]),
