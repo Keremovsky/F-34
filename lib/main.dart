@@ -1,4 +1,6 @@
 import 'package:bootcamp_flutter/features/expense/screens/expense_screen.dart.dart';
+import 'package:bootcamp_flutter/features/home/exchange_screen.dart';
+import 'package:bootcamp_flutter/features/home/home_screen.dart';
 import 'package:bootcamp_flutter/features/home/profile_screen.dart';
 import 'package:bootcamp_flutter/features/income/screens/income_screen.dart.dart';
 import 'package:firebase_core/firebase_core.dart';

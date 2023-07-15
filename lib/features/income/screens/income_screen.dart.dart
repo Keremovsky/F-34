@@ -1,5 +1,6 @@
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class IncomeScreen extends StatefulWidget {
   static final routeName = "/incomeScreen";
