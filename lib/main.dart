@@ -11,7 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'features/auth/screens/forgot_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
 import 'features/home/home_screen.dart';
+import 'features/home/save_up_screen.dart';
 import 'firebase_options.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
