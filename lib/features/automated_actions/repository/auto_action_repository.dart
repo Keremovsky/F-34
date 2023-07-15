@@ -61,6 +61,11 @@ class AutoActionRepository {
     }
   }
 
+  Stream<QuerySnapshot<Object?>> getAutoActionStream() {
+    final snapshots = _autoActions.snapshots();
+    return snapshots;
+  }
+
   Future<bool> performAutoActions() async {
     try {
       // get list of autoActions on database
