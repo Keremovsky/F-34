@@ -6,7 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ForgotScreen extends ConsumerStatefulWidget {
-  static final routeName = "/forgotScreen";
+  static const routeName = "/forgotScreen";
 
   const ForgotScreen({super.key});
 
@@ -59,7 +59,8 @@ class _ForgotScreenState extends ConsumerState<ForgotScreen> {
                     child: TextFormField(
                       onSaved: (value) => email = value!,
                       validator: RequiredValidator(
-                          errorText: 'Please enter your email!'),
+                        errorText: 'Please enter your email!',
+                      ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(

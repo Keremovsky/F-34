@@ -2,6 +2,7 @@ import 'package:bootcamp_flutter/core/providers/firebase_providers.dart';
 import 'package:bootcamp_flutter/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -50,6 +51,7 @@ class AuthRepository {
           uid: user.user!.uid,
           name: user.user!.displayName!,
           email: user.user!.email!,
+          money: 0,
         );
 
         await _userRef.doc(user.user!.uid).set(userModel.toMap());
@@ -61,7 +63,7 @@ class AuthRepository {
       return right(userModel);
     } on FirebaseAuthException catch (e) {
       // if it fails
-      print(e.toString());
+      debugPrint(e.toString());
       return left(e.toString());
     }
   }
@@ -79,7 +81,7 @@ class AuthRepository {
       return right(userModel);
     } on FirebaseAuthException catch (e) {
       // if it fails
-      print(e.toString());
+      debugPrint(e.toString());
       return left(e.toString());
     }
   }
@@ -98,14 +100,15 @@ class AuthRepository {
         uid: user.user!.uid,
         name: name,
         email: email,
+        money: 0,
       );
 
       await _userRef.doc(user.user!.uid).set(userModel.toMap());
 
       return true;
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       // if it fail
-      print(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }

@@ -1,9 +1,14 @@
+import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:pie_chart/pie_chart.dart';
+
+import '../automated_actions/controller/auto_action_controller.dart';
+import '../finance/screens/expense_screen.dart';
+import '../finance/screens/income_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   static final routeName = "/homeScreen";
@@ -23,10 +28,11 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
     Palette.pieChartColor,
   ];
 
-
   @override
   void initState() {
     super.initState();
+    // control and perform all automated actions when user sign in
+    ref.read(autoActionControllerProvider.notifier).performAutoActions();
   }
 
   @override
@@ -46,7 +52,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                   _key.currentState?.openDrawer();
                 },
                 child: ImageIcon(
-                  AssetImage("assets/icons/side_menu.png"),
+                  const AssetImage("assets/icons/side_menu.png"),
                   size: 40.h,
                 ),
               ),
@@ -59,19 +65,20 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
             width: 100.w,
             child: const Image(image: AssetImage(Constants.appLogo)),
           ),
-          SizedBox(width: 140.w,),
+          SizedBox(
+            width: 140.w,
+          ),
           InkWell(
             onTap: () {
-
+              Navigator.of(context).pushNamed(ProfileScreen.routeName);
             },
             child: Container(
-              height:50.h,
+              height: 50.h,
               width: 50.w,
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 backgroundImage: AssetImage(Constants.profilePicture),
                 radius: 50,
               ),
-
             ),
           ),
           Container(padding: const EdgeInsets.all(10.0)),
@@ -92,34 +99,65 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ),
             ),
             ListTile(
-              title: Text('Enter Income', style: TextStyle(color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.bold),),
+              title: Text(
+                'Enter Income',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(IncomeScreen.routeName),
+            ),
+            const Divider(color: Colors.black),
+            ListTile(
+              title: Text(
+                'Enter Outcome',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(ExpenseScreen.routeName),
+            ),
+            const Divider(color: Colors.black),
+            ListTile(
+              title: Text(
+                'Save Money',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
               onTap: () => {},
             ),
-            Divider(color: Colors.black),
+            const Divider(color: Colors.black),
             ListTile(
-              title: Text('Enter Outcome', style: TextStyle(color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.bold),),
+              title: Text(
+                'Update Goal',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
               onTap: () => {},
             ),
-            Divider(color: Colors.black),
+            const Divider(color: Colors.black),
             ListTile(
-              title: Text('Save Money', style: TextStyle(color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.bold),),
-              onTap: () => {},
-            ),
-            Divider(color: Colors.black),
-            ListTile(
-              title: Text('Update Goal', style: TextStyle(color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.bold),),
-              onTap: () => {},
-            ),
-            Divider(color: Colors.black),
-            ListTile(
-              title: Text('Log Out', style: TextStyle(color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.bold),),
+              title: Text(
+                'Log Out',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
               onTap: () => {},
             ),
           ],
         ),
       ),
-      body:
-      Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -137,7 +175,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ),
               child: Text(
                 "Avaliable in Wallet\n...... TL",
-                style: TextStyle(color: Colors.black, fontSize: 25.sp),),
+                style: TextStyle(color: Colors.black, fontSize: 25.sp),
+              ),
             ),
           ),
           SizedBox(
@@ -154,7 +193,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ),
               child: Text(
                 "Total Saving\n...... TL",
-                style: TextStyle(color: Colors.black, fontSize: 25.sp),),
+                style: TextStyle(color: Colors.black, fontSize: 25.sp),
+              ),
             ),
           ),
           SizedBox(
@@ -175,17 +215,18 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                 children: [
                   Text(
                     "Goal:......\nRemaining: %62.5",
-                    style: TextStyle(color: Colors.black, fontSize: 20.sp),),
+                    style: TextStyle(color: Colors.black, fontSize: 20.sp),
+                  ),
                   PieChart(
                     dataMap: dataMap,
                     baseChartColor: Palette.background,
                     colorList: colorList,
                     initialAngleInDegree: 270,
-                    legendOptions: LegendOptions(
+                    legendOptions: const LegendOptions(
                       showLegendsInRow: false,
                       showLegends: false,
                     ),
-                    chartValuesOptions: ChartValuesOptions(
+                    chartValuesOptions: const ChartValuesOptions(
                       showChartValueBackground: false,
                       showChartValues: false,
                       showChartValuesInPercentage: false,
@@ -198,7 +239,6 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-
     );
   }
 }
