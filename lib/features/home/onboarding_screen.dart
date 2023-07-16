@@ -1,7 +1,9 @@
+import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
 import 'package:bootcamp_flutter/features/home/home_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -14,25 +16,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundImageUrl: 'assets/images/background.png',
       imageUrl: 'assets/images/slide1_image.png',
       title: "Welcome to Bütçe'm!",
-      description: "Bütçe'm is an application to simplify personal financial management. With Bütçe'm you can manage your money better than ever.",
+      description:
+          "Bütçe'm is an application to simplify personal financial management. With Bütçe'm you can manage your money better than ever.",
     ),
     Slide(
       backgroundImageUrl: 'assets/images/background.png',
       imageUrl: 'assets/images/slide2_image.png',
       title: "What can you do?",
-      description: "Using Bütçe'm, you can control your budget, save money and finally reach your financial aim.",
+      description:
+          "Using Bütçe'm, you can control your budget, save money and finally reach your financial aim.",
     ),
     Slide(
       backgroundImageUrl: 'assets/images/background.png',
       imageUrl: 'assets/images/slide3_image.png',
       title: 'For who?',
-      description: "This application, which is suitable to use for everyone, is also an excellent option for those who are new to financial management.",
+      description:
+          "This application, which is suitable to use for everyone, is also an excellent option for those who are new to financial management.",
     ),
     Slide(
       backgroundImageUrl: 'assets/images/background.png',
       imageUrl: 'assets/images/slide4_image.png',
       title: 'Are you ready to start?',
-      description: "Welcome to Bütçe'm! Follow your incomes and outcomes to complete your financial aims now.",
+      description:
+          "Welcome to Bütçe'm! Follow your incomes and outcomes to complete your financial aims now.",
     ),
   ];
 
@@ -67,73 +73,40 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.background,
-      body: Stack(
-        children: [
-          Swiper(
-            controller: controller,
-            itemCount: slides.length,
-            index: currentIndex,
-            onIndexChanged: (int index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            pagination: SwiperPagination(),
-            itemBuilder: (BuildContext context, int index) {
-              return SlideItem(
-                backgroundImageUrl: slides[index].backgroundImageUrl,
-                imageUrl: slides[index].imageUrl,
-                title: slides[index].title,
-                description: slides[index].description,
-              );
-            },
-          ),
-          Positioned(
-            bottom: 30,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: [
-                    if (currentIndex == 0)
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: IconButton(
-                                  onPressed: goToNextSlide,
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Palette.categoryBackground,
-                                    size: 35,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (0 < currentIndex && currentIndex < slides.length - 1)
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: IconButton(
-                                  onPressed: goToPreviousSlide,
-                                  icon: Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Palette.categoryBackground,
-                                    size: 35,
-                                  )
-                                ),
-                              ),
-                            ),
-                            Align(
+      body: Stack(children: [
+        Swiper(
+          controller: controller,
+          itemCount: slides.length,
+          index: currentIndex,
+          onIndexChanged: (int index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          pagination: SwiperPagination(),
+          itemBuilder: (BuildContext context, int index) {
+            return SlideItem(
+              backgroundImageUrl: slides[index].backgroundImageUrl,
+              imageUrl: slides[index].imageUrl,
+              title: slides[index].title,
+              description: slides[index].description,
+            );
+          },
+        ),
+        Positioned(
+          bottom: 30,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  if (currentIndex == 0)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Align(
                               alignment: Alignment.bottomRight,
                               child: IconButton(
                                 onPressed: goToNextSlide,
@@ -144,55 +117,90 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    if (currentIndex == slides.length - 1)
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: IconButton(
+                    ),
+                  if (0 < currentIndex && currentIndex < slides.length - 1)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: IconButton(
                                   onPressed: goToPreviousSlide,
                                   icon: Icon(
                                     Icons.arrow_back_ios,
                                     color: Palette.categoryBackground,
                                     size: 35,
-                                  )
-                                ),
+                                  )),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: IconButton(
+                              onPressed: goToNextSlide,
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Palette.categoryBackground,
+                                size: 35,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed(HomeScreen.routeName);
-                                },
-                                child: Text(
-                                  'Finish',
-                                  style: TextStyle(
-                                    color: Palette.categoryBackground,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+                  if (currentIndex == slides.length - 1)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: IconButton(
+                                  onPressed: goToPreviousSlide,
+                                  icon: Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Palette.categoryBackground,
+                                    size: 35,
+                                  )),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: TextButton(
+                              onPressed: () async {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setBool("showHome", true);
+
+                                if (mounted) {
+                                  Navigator.of(context)
+                                      .pushNamed(LoginScreen.routeName);
+                                }
+                              },
+                              child: Text(
+                                'Finish',
+                                style: TextStyle(
+                                  color: Palette.categoryBackground,
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
-        ]
-      ),
+        ),
+      ]),
     );
   }
 }
-
 
 class Slide {
   final String backgroundImageUrl;
@@ -236,15 +244,15 @@ class SlideItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-                children:[ Container(
-                  height: 350,
-                  child: Image(image: AssetImage(imageUrl)),
-                ),
-                ]
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Container(
+                height: 350,
+                child: Image(image: AssetImage(imageUrl)),
               ),
-            SizedBox(height: 35,),
+            ]),
+            SizedBox(
+              height: 35,
+            ),
             Text(
               title,
               style: TextStyle(

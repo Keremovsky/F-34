@@ -1,3 +1,4 @@
+import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,6 +35,10 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
     super.initState();
     // control and perform all automated actions when user sign in
     ref.read(autoActionControllerProvider.notifier).performAutoActions();
+  }
+
+  void logOut() async {
+    ref.read(authControllerProvider.notifier).logOut();
   }
 
   @override
@@ -142,7 +147,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold),
               ),
-              onTap: () => {},
+              onTap: () {},
             ),
             const Divider(color: Colors.black),
             ListTile(
@@ -153,7 +158,10 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold),
               ),
-              onTap: () => {},
+              onTap: () {
+                logOut();
+                Navigator.of(context).pushNamed(LoginScreen.routeName);
+              },
             ),
           ],
         ),

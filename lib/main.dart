@@ -6,11 +6,13 @@ import 'package:bootcamp_flutter/features/finance/screens/exchange_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/save_up_screen.dart';
+import 'package:bootcamp_flutter/features/home/onboarding_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'features/auth/screens/forgot_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
 import 'features/finance/screens/expense_screen.dart';
@@ -24,11 +26,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ProviderScope(child: MyApp()));
+  final prefs = await SharedPreferences.getInstance();
+  final showHome = prefs.getBool("showHome") ?? false;
+  runApp(ProviderScope(child: MyApp(showHome: showHome)));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.showHome});
+  final bool showHome;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +45,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        "/": (context) => const LoginScreen(),
+        "/": (context) => showHome ? const LoginScreen() : OnboardingScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         ForgotScreen.routeName: (context) => const ForgotScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
         FinanceListScreen.routeName: (context) => const FinanceListScreen(),
         FinanceFilterScreen.routeName: (context) => const FinanceFilterScreen(),
         SaveUpScreen.routeName: (context) => const SaveUpScreen(),
-        ExchangeScreen.routeName: (context) => const ExchangeScreen(),
+        ExchangeScreen.routeName: (context) => ExchangeScreen(),
         AutoActionListScreen.routeName: (context) => AutoActionListScreen(),
         CreateAutomatedActionScreen.routeName: (context) =>
             const CreateAutomatedActionScreen(),

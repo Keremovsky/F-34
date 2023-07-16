@@ -82,6 +82,10 @@ class AuthController extends StateNotifier<bool> {
       if (mounted) _giveFeedback("Password reset process failed.", context);
     }
   }
+
+  void logOut() {
+    _authRepository.logOut();
+  }
 }
 
 // return a feedback Snackbar

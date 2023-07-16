@@ -1,10 +1,10 @@
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ExchangeScreen extends StatefulWidget {
   static const routeName = "/exchangeScreen";
-
-  const ExchangeScreen({super.key});
 
   @override
   _ExchangeScreenState createState() => _ExchangeScreenState();
@@ -12,26 +12,39 @@ class ExchangeScreen extends StatefulWidget {
 
 class _ExchangeScreenState extends State<ExchangeScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? category;
-  // Declare variables to store the buying and selling amounts
-  double buyingAmount = 0.0;
-  double sellingAmount = 0.0;
+  Map<String, dynamic>? exchangeRates;
 
-  // Declare variables for exchange rates
-  double dollarRate = 0.0;
-  double euroRate = 0.0;
-  double poundRate = 0.0;
-  double goldRate = 0.0;
+  Future<void> fetchExchangeRates() async {
+    var response = await http.get(
+      Uri.parse('https://api.exchangerate-api.com/v4/latest/TRY'),
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        exchangeRates = json.decode(response.body)['rates'];
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchExchangeRates();
+  }
 
   @override
   Widget build(BuildContext context) {
+    String? category;
+    double buyingAmount = 0.0;
+    double sellingAmount = 0.0;
+
     return Scaffold(
       body: Container(
-        color: Palette.background, // Set the background color
-        padding: EdgeInsets.all(16.0),
+        color: Palette.background,
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(height: 36.0),
+            const SizedBox(height: 36.0),
             // Add exchange rate information
             Text(
               'Exchange Rates',
@@ -41,24 +54,24 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                 color: Palette.titleText,
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
-              'Dollar Rate: $dollarRate',
+              'Dollar Rate: ${exchangeRates?['USD'] != null ? exchangeRates!['USD'] > 1 ? '+' : '-' : ''}${exchangeRates?['USD'] ?? ""}',
               style: TextStyle(color: Palette.titleText),
             ),
             Text(
-              'Euro Rate: $euroRate',
+              'Euro Rate: ${exchangeRates?['EUR'] != null ? exchangeRates!['EUR'] > 1 ? '+' : '-' : ''}${exchangeRates?['EUR'] ?? ""}',
               style: TextStyle(color: Palette.titleText),
             ),
             Text(
-              'Pound Rate: $poundRate',
+              'Pound Rate: ${exchangeRates?['GBP'] != null ? exchangeRates!['GBP'] > 1 ? '+' : '-' : ''}${exchangeRates?['GBP'] ?? ""}',
               style: TextStyle(color: Palette.titleText),
             ),
             Text(
-              'Gold Rate: $goldRate',
+              'Gold Rate: ${exchangeRates?['XAU'] != null ? exchangeRates!['XAU'] > 1 ? '+' : '-' : ''}${exchangeRates?['XAU'] ?? ""}',
               style: TextStyle(color: Palette.titleText),
             ),
-            SizedBox(height: 26.0),
+            const SizedBox(height: 26.0),
             DropdownButtonFormField(
               decoration: InputDecoration(
                 labelText: 'Category',
@@ -86,7 +99,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
               ],
               onChanged: (value) => category = value as String?,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               onChanged: (value) {
                 setState(() {
@@ -100,7 +113,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                 labelStyle: TextStyle(color: Palette.textFieldText),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               onChanged: (value) {
                 setState(() {
@@ -114,7 +127,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                 labelStyle: TextStyle(color: Palette.textFieldText),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor:
@@ -126,7 +139,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                   _formKey.currentState!.save();
                 }
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         ),
