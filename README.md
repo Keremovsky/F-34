@@ -217,7 +217,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
       <td>8</td>
       <td>9</td>
    <tr>  
-    <td><img src=" " width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/exchange.png" width="270" height="540"></td>
     <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding1.png " width="270" height="540"></td>
     <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding2.png" width="270" height="540"></td>
  </table>
