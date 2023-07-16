@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:bootcamp_flutter/features/automated_actions/controller/auto_action_controller.dart';
+
 import 'package:bootcamp_flutter/features/automated_actions/screens/auto_action_list_screen.dart';
-import 'package:bootcamp_flutter/features/automated_actions/screens/new_auto_action_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
+import 'package:bootcamp_flutter/features/home/badge_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,7 +73,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 80),
+              const SizedBox(height: 65),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Container(
@@ -95,7 +95,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 35),
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Container(
@@ -119,7 +119,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       )),
                 ),
               ),
-              const SizedBox(height: 35),
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Container(
@@ -145,6 +145,32 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: Container(
+                  width: double.infinity,
+                  child: RawMaterialButton(
+                    fillColor: Palette.textFieldBackground,
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(BadgeScreen.routeName);
+                    },
+                    child: Text(
+                      "Badges",
+                      style: TextStyle(
+                        color: Palette.buttonText,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ]),
       ),
     );

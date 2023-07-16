@@ -6,6 +6,7 @@ import 'package:bootcamp_flutter/features/finance/screens/exchange_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/save_up_screen.dart';
+import 'package:bootcamp_flutter/features/home/badge_screen.dart';
 import 'package:bootcamp_flutter/features/home/onboarding_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -61,6 +62,8 @@ class MyApp extends StatelessWidget {
         CreateAutomatedActionScreen.routeName: (context) =>
             const CreateAutomatedActionScreen(),
         AutoActionFilterScreen.routeName: (context) => AutoActionFilterScreen(),
+        OnboardingScreen.routeName:(context) => OnboardingScreen(),
+        BadgeScreen.routeName:(context) => BadgeScreen(),
       },
     );
   }

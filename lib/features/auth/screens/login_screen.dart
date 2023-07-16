@@ -2,7 +2,7 @@ import 'package:bootcamp_flutter/core/constants/constants.dart';
 import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
 import 'package:bootcamp_flutter/features/auth/screens/forgot_screen.dart';
 import 'package:bootcamp_flutter/features/auth/screens/sign_up_screen.dart';
-import 'package:bootcamp_flutter/features/automated_actions/controller/auto_action_controller.dart';
+import 'package:bootcamp_flutter/features/home/home_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -133,6 +133,9 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                     ref
                         .read(authControllerProvider.notifier)
                         .signInWithMail(email, password, context);
+
+                    Navigator.of(context)
+                            .pushNamed(HomeScreen.routeName);
                   },
                   child: Text(
                     "Log In",
@@ -185,6 +188,9 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                       ref
                           .read(authControllerProvider.notifier)
                           .signInWithGoogle(context);
+
+                      Navigator.of(context)
+                            .pushNamed(HomeScreen.routeName);
                     }, //Google login
                     child: Text(
                       "Log In With Google",

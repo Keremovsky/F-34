@@ -157,3 +157,89 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
   - Takımiçi iletişimin yeterli düzeyde olmadığına karar verilmiştir.
   - Takımın üyelerinin diğer sprintlerde daha aktif rol almasına karar verilmiştir.
 
+<h1>Sprint 3</h1>
+
+
+- **Sprint Notları:** User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir.
+
+
+- **Sprint içinde tamamlanması tahmin edilen puan:** 90 Puan
+
+  
+- **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanması gereken 250 puanlık backlog bulunmaktadır. İlk iki sprintte 160 puanlık backlog tamamlanmıştır.
+
+  
+- **Backlog düzeni ve Story seçimleri:** Backlog'umuz yapılacak story'lere göre düzenlenmiştir. 
+
+  
+- Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
+
+  
+- **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü Discord ve Whatsapp üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örnekleri word olarak Readme'de tarafımızdan paylaşılmaktadır: [Daily Scrum]( https://stdyildizedu-my.sharepoint.com/:w:/g/personal/sevval_bayhan_std_yildiz_edu_tr/EVoq1lXGHFZBhWQ2dH-QvMwBcQtAwPzaPODfWKBIgc25TA?e=SOhmgv)
+
+
+- **Sprint Board Update:** Sprint Board Screenshotları: ![miro1](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/Kanban_Framework_4.jpg).![miro1](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/Kanban_Framework_5.jpg).
+  
+
+- **Ürün Durumu:** Ekran Görüntüleri: 
+
+ <table>
+  <tr>
+    <td>1</td>
+     <td>2</td>
+     <td>3</td>
+    
+
+  <tr>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/AutoAction.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/AutoActionFilter.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/FinanceFilter.png" width="270" height="540"></td>
+   
+ </table>
+
+<table>
+  <tr>
+    <td>4</td>
+     <td>5</td>
+     <td>6</td>
+    
+
+  <tr>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/Profile.png " width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/SaveMoney.png " width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/badgets.png " width="270" height="540"></td>
+   
+ </table>
+ 
+ <table>
+   <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+   <tr>  
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/exchange.png" width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding1.png " width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding2.png" width="270" height="540"></td>
+ </table>
+
+ <table>
+  <tr>
+    <td>10</td>
+     <td>11</td>
+    
+  <tr>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding3.png " width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding4.png " width="270" height="540"></td>
+
+ <table>
+
+
+- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (borsa, hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
+
+- **Sprint Review Katılımcıları:** Kerem Okumuş, Meryem Gül Kartal, Semanur Özyılmaz, Kerem Burak Yılmaz, Şevval Bayhan
+
+
+- **Sprint Retrospective:**
+   - Tüm ekip üyeleri gerekli çabalarını ellerinden geldiğince göstermiştir. Bu proje ile takım çalışması ve uygulama geliştirme konusunda deneyim kazanılmıştır.
+  - Ancak takım üyelerinin şahsi yoğunlukları sebebiyle uygulama planlanana göre eksik özellikleriyle tamamlanmıştır. 
+
