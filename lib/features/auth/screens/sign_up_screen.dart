@@ -1,5 +1,5 @@
 import 'package:bootcamp_flutter/core/constants/constants.dart';
-import 'package:bootcamp_flutter/features/home/onboarding_screen.dart';
+import 'package:bootcamp_flutter/features/home/home_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -183,7 +183,7 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                                 .signUpWithMail(email, password, name, context);
                             
                             Navigator.of(context)
-                            .pushNamed(OnboardingScreen.routeName);
+                            .pushNamed(HomeScreen.routeName);
                           }
                         },
                         style: ElevatedButton.styleFrom(
