@@ -4,6 +4,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  static const routeName = "/onboardingScreen";
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }

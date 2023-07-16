@@ -1,8 +1,9 @@
 import 'package:bootcamp_flutter/core/constants/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:bootcamp_flutter/features/home/onboarding_screen.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 import '../controller/auth_controller.dart';
@@ -180,6 +181,9 @@ class _SignUpScreen extends ConsumerState<SignUpScreen> {
                             ref
                                 .read(authControllerProvider.notifier)
                                 .signUpWithMail(email, password, name, context);
+                            
+                            Navigator.of(context)
+                            .pushNamed(OnboardingScreen.routeName);
                           }
                         },
                         style: ElevatedButton.styleFrom(
