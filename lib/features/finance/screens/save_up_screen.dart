@@ -1,11 +1,15 @@
+import 'package:bootcamp_flutter/core/constants/constants.dart';
+import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import '../../user_profile/controller/user_profile_controller.dart';
+
 
 class SaveUpScreen extends ConsumerStatefulWidget {
-  static const routeName = "/saveUpScreen";
+  static final routeName = "/saveUpScreen";
 
   const SaveUpScreen({Key? key}) : super(key: key);
 
@@ -17,7 +21,6 @@ class _SaveUpScreen extends ConsumerState<SaveUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  late int money = 100;
   bool isFail = true;
 
   @override
@@ -74,16 +77,21 @@ class _SaveUpScreen extends ConsumerState<SaveUpScreen> {
                     ),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
+                      final usermoney = ref.read(userProvider)?.money?? 0;
                       try {
-                        if (int.parse(amountController.text) > money) {
+                        if (double.parse(amountController.text) > usermoney) {
                           return 'The value entered is more than the\nbalance in the wallet!';
                         }
+
                         isFail = false;
                         return null;
+
                       } catch (ex) {
                         return 'Please enter a number value';
                       } finally {
-                        RequiredValidator(errorText: 'Please enter amount!');
+                        if ((amountController.text) == ''){
+                          return 'Please enter amount';
+                        }
                       }
                     },
                     onSaved: (value) => amount = value,
@@ -106,6 +114,8 @@ class _SaveUpScreen extends ConsumerState<SaveUpScreen> {
                       ),
                     ),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: RequiredValidator(
+                        errorText: 'Please enter description!'),
                     onSaved: (value) => description = value,
                   ),
                   SizedBox(height: 50.h),
@@ -119,15 +129,16 @@ class _SaveUpScreen extends ConsumerState<SaveUpScreen> {
                           if (isFail == false) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => SuccessScreen()),
+                              MaterialPageRoute(builder: (context) => SuccessScreen()),
                             );
-                            money = money - int.parse(amountController.text);
-                          } else {
+                            ref
+                                .read(userProfileControllerProvider.notifier)
+                                .updateUserMoney(-double.parse(amountController.text));
+                          }
+                          else {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => FailScreen()),
+                              MaterialPageRoute(builder: (context) => FailScreen()),
                             );
                           }
                         }
@@ -156,14 +167,17 @@ class _SaveUpScreen extends ConsumerState<SaveUpScreen> {
       ),
     );
   }
+
 }
 
 class SuccessScreen extends StatefulWidget {
+
   @override
   _SuccessScreenState createState() => _SuccessScreenState();
 }
 
 class _SuccessScreenState extends State<SuccessScreen> {
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -189,11 +203,13 @@ class _SuccessScreenState extends State<SuccessScreen> {
 }
 
 class FailScreen extends StatefulWidget {
+
   @override
   _FailScreenState createState() => _FailScreenState();
 }
 
 class _FailScreenState extends State<FailScreen> {
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -217,3 +233,4 @@ class _FailScreenState extends State<FailScreen> {
     );
   }
 }
+

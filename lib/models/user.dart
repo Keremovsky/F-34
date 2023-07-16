@@ -5,12 +5,14 @@ class UserModel {
   final String uid;
   final String name;
   final String email;
+  final String registerType;
   final double money;
 
   UserModel({
     required this.uid,
     required this.name,
     required this.email,
+    required this.registerType,
     required this.money,
   });
 
@@ -18,12 +20,14 @@ class UserModel {
     String? uid,
     String? name,
     String? email,
+    String? registerType,
     double? money,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
       name: name ?? this.name,
       email: email ?? this.email,
+      registerType: registerType ?? this.registerType,
       money: money ?? this.money,
     );
   }
@@ -33,6 +37,7 @@ class UserModel {
       'uid': uid,
       'name': name,
       'email': email,
+      'registerType': registerType,
       'money': money,
     };
   }
@@ -42,6 +47,7 @@ class UserModel {
       uid: map['uid'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
+      registerType: map['registerType'] as String,
       money: map['money'] as double,
     );
   }
@@ -53,7 +59,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, name: $name, email: $email, money: $money)';
+    return 'UserModel(uid: $uid, name: $name, email: $email, registerType: $registerType, money: $money)';
   }
 
   @override
@@ -63,11 +69,16 @@ class UserModel {
     return other.uid == uid &&
         other.name == name &&
         other.email == email &&
+        other.registerType == registerType &&
         other.money == money;
   }
 
   @override
   int get hashCode {
-    return uid.hashCode ^ name.hashCode ^ email.hashCode ^ money.hashCode;
+    return uid.hashCode ^
+        name.hashCode ^
+        email.hashCode ^
+        registerType.hashCode ^
+        money.hashCode;
   }
 }
