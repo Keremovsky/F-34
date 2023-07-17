@@ -1,6 +1,7 @@
 import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_filter_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/finance_list_screen.dart';
+import 'package:bootcamp_flutter/features/home/exchange_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        "/": (context) => LoginScreen(),
+        "/": (context) => ExchangeScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
         ForgotScreen.routeName: (context) => ForgotScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         ExpenseScreen.routeName: (context) => ExpenseScreen(),
         FinanceListScreen.routeName: (context) => FinanceListScreen(),
         FinanceFilterScreen.routeName: (context) => FinanceFilterScreen(),
+        ExchangeScreen.routeName: (context) => ExchangeScreen()
       },
     );
   }

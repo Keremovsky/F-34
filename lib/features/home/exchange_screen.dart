@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ExchangeScreen extends StatefulWidget {
+  static final routeName = "/exchangeScreen";
+
   @override
   _ExchangeScreenState createState() => _ExchangeScreenState();
 }
@@ -66,10 +68,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
               'Pound Rate: ${exchangeRates?['GBP'] != null ? exchangeRates!['GBP'] > 1 ? '+' : '-' : ''}${exchangeRates?['GBP'] ?? ""}',
               style: TextStyle(color: Palette.titleText),
             ),
-            Text(
-              'Gold Rate: ${exchangeRates?['XAU'] != null ? exchangeRates!['XAU'] > 1 ? '+' : '-' : ''}${exchangeRates?['XAU'] ?? ""}',
-              style: TextStyle(color: Palette.titleText),
-            ),
+            
             SizedBox(height: 26.0),
             DropdownButtonFormField(
                 decoration: InputDecoration(
@@ -81,7 +80,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                 items: [
                   DropdownMenuItem(child: Text('Dollar', style: TextStyle(color: Palette.categoryText)), value: 'dollar'),
                   DropdownMenuItem(child: Text('Euro', style: TextStyle(color: Palette.categoryText)), value: 'euro'),
-                  DropdownMenuItem(child: Text('Sterling', style: TextStyle(color: Palette.categoryText)), value: 'sterling'),
+                  DropdownMenuItem(child: Text('Pound', style: TextStyle(color: Palette.categoryText)), value: 'pound'),
                   DropdownMenuItem(child: Text('Gold', style: TextStyle(color: Palette.categoryText)), value: 'gold'),
             ],
                 onChanged: (value) => category = value as String?,
