@@ -52,8 +52,20 @@ class FinanceController extends StateNotifier {
     if (control) {
       if (mounted) {
         _giveFeedback("Success", context);
-        Future.delayed(const Duration(milliseconds: 1))
-            .then((value) => Navigator.of(context).pop());
+      }
+    } else {
+      if (mounted) {
+        _giveFeedback("Failure", context);
+      }
+    }
+  }
+
+  void saveMoney(BuildContext context, double value) async {
+    final control = await _financeRepository.saveMoney(value);
+
+    if (control) {
+      if (mounted) {
+        _giveFeedback("Success", context);
       }
     } else {
       if (mounted) {

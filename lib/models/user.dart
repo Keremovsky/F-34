@@ -7,6 +7,7 @@ class UserModel {
   final String email;
   final String registerType;
   final double money;
+  final double savedMoney;
 
   UserModel({
     required this.uid,
@@ -14,6 +15,7 @@ class UserModel {
     required this.email,
     required this.registerType,
     required this.money,
+    required this.savedMoney,
   });
 
   UserModel copyWith({
@@ -22,6 +24,7 @@ class UserModel {
     String? email,
     String? registerType,
     double? money,
+    double? savedMoney,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -29,6 +32,7 @@ class UserModel {
       email: email ?? this.email,
       registerType: registerType ?? this.registerType,
       money: money ?? this.money,
+      savedMoney: savedMoney ?? this.savedMoney,
     );
   }
 
@@ -39,6 +43,7 @@ class UserModel {
       'email': email,
       'registerType': registerType,
       'money': money,
+      'savedMoney': savedMoney,
     };
   }
 
@@ -49,6 +54,7 @@ class UserModel {
       email: map['email'] as String,
       registerType: map['registerType'] as String,
       money: map['money'] as double,
+      savedMoney: map['savedMoney'] as double,
     );
   }
 
@@ -59,7 +65,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, name: $name, email: $email, registerType: $registerType, money: $money)';
+    return 'UserModel(uid: $uid, name: $name, email: $email, registerType: $registerType, money: $money, savedMoney: $savedMoney)';
   }
 
   @override
@@ -70,7 +76,8 @@ class UserModel {
         other.name == name &&
         other.email == email &&
         other.registerType == registerType &&
-        other.money == money;
+        other.money == money &&
+        other.savedMoney == savedMoney;
   }
 
   @override
@@ -79,6 +86,7 @@ class UserModel {
         name.hashCode ^
         email.hashCode ^
         registerType.hashCode ^
-        money.hashCode;
+        money.hashCode ^
+        savedMoney.hashCode;
   }
 }

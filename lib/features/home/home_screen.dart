@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
+import 'package:bootcamp_flutter/features/finance/screens/save_up_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -136,7 +137,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold),
               ),
-              onTap: () => {},
+              onTap: () =>
+                  {Navigator.of(context).pushNamed(SaveUpScreen.routeName)},
             ),
             const Divider(color: Colors.black),
             ListTile(
@@ -166,60 +168,57 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 20.h,
-          ),
-          Center(
-            child: Container(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 20.h),
+            Center(
+              child: Container(
+                height: 120.h,
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Palette.textFieldBackground,
+                ),
+                child: Text(
+                  "Avaliable in Wallet\n${ref.watch(userProvider)!.money.toString()} TL",
+                  style: TextStyle(color: Colors.black, fontSize: 25.sp),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50.h,
+            ),
+            Container(
               height: 120.h,
-              width: 300.h,
+              width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Palette.textFieldBackground,
               ),
               child: Text(
-                "Avaliable in Wallet\n${ref.watch(userProvider)!.money.toString()} TL",
+                "Total Saving\n${ref.watch(userProvider)!.savedMoney.toString()} TL",
                 style: TextStyle(color: Colors.black, fontSize: 25.sp),
               ),
             ),
-          ),
-          SizedBox(
-            height: 50.h,
-          ),
-          Center(
-            child: Container(
-              height: 120.h,
-              width: 300.h,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Palette.textFieldBackground,
-              ),
-              child: Text(
-                "Total Saving\n...... TL",
-                style: TextStyle(color: Colors.black, fontSize: 25.sp),
-              ),
+            SizedBox(
+              height: 50.h,
             ),
-          ),
-          SizedBox(
-            height: 50.h,
-          ),
-          Center(
-            child: Container(
+            Container(
               height: 120.h,
-              width: 300.h,
+              width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Palette.textFieldBackground,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
@@ -245,8 +244,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

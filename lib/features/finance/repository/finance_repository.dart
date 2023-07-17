@@ -128,6 +128,20 @@ class FinanceRepository {
     }
   }
 
+  Future<bool> saveMoney(double value) async {
+    try {
+      _ref
+          .read(userProfileControllerProvider.notifier)
+          .updateUserSavedMoney(-value);
+
+      _ref.read(userProfileControllerProvider.notifier).updateUserMoney(value);
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
   Stream<QuerySnapshot<Object?>> getFinanceStream() {
     final snapshots = _finances.snapshots();
     return snapshots;

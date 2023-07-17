@@ -18,6 +18,10 @@ class UserProfileController extends StateNotifier {
     await _userProfileRepository.updateUserMoney(value);
   }
 
+  void updateUserSavedMoney(double value) async {
+    await _userProfileRepository.updateUserSavedMoney(value);
+  }
+
   void updateUserProfile(
       BuildContext context, String name, String email) async {
     final control = await _userProfileRepository.updateUserProfile(name, email);

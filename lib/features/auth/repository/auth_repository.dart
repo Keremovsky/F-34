@@ -58,6 +58,7 @@ class AuthRepository {
           email: user.user!.email!,
           registerType: "google",
           money: 0,
+          savedMoney: 0,
         );
 
         await _userRef.doc(user.user!.uid).set(userModel.toMap());
@@ -108,6 +109,7 @@ class AuthRepository {
         email: email,
         registerType: "mail",
         money: 0,
+        savedMoney: 0,
       );
 
       await _userRef.doc(user.user!.uid).set(userModel.toMap());
