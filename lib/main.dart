@@ -58,13 +58,13 @@ class MyApp extends StatelessWidget {
         FinanceFilterScreen.routeName: (context) => const FinanceFilterScreen(),
         SaveUpScreen.routeName: (context) => const SaveUpScreen(),
         ExchangeScreen.routeName: (context) => ExchangeScreen(),
-        AutoActionListScreen.routeName: (context) => AutoActionListScreen(),
+        AutoActionListScreen.routeName: (context) =>
+            const AutoActionListScreen(),
         CreateAutomatedActionScreen.routeName: (context) =>
             const CreateAutomatedActionScreen(),
-        AutoActionFilterScreen.routeName: (context) => AutoActionFilterScreen(),
-        OnboardingScreen.routeName: (context) => OnboardingScreen(),
-        BadgeScreen.routeName: (context) => BadgeScreen(),
-        SaveUpScreen.routeName: (context) => SaveUpScreen(),
+        AutoActionFilterScreen.routeName: (context) =>
+            const AutoActionFilterScreen(),
+        BadgeScreen.routeName: (context) => const BadgeScreen(),
       },
     );
   }
