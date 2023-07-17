@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
+import 'package:bootcamp_flutter/features/finance/screens/exchange_screen.dart';
 import 'package:bootcamp_flutter/features/finance/screens/save_up_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -150,6 +151,19 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     fontWeight: FontWeight.bold),
               ),
               onTap: () {},
+            ),
+            const Divider(color: Colors.black),
+            ListTile(
+              title: Text(
+                'Exchanges',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(ExchangeScreen.routeName);
+              },
             ),
             const Divider(color: Colors.black),
             ListTile(
