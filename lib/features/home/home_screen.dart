@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/features/auth/screens/login_screen.dart';
+import 'package:bootcamp_flutter/features/finance/screens/save_up_screen.dart';
 import 'package:bootcamp_flutter/features/user_profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -136,7 +137,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold),
               ),
-              onTap: () => {},
+              onTap: () =>
+                  {Navigator.of(context).pushNamed(SaveUpScreen.routeName)},
             ),
             const Divider(color: Colors.black),
             ListTile(
@@ -200,7 +202,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                 color: Palette.textFieldBackground,
               ),
               child: Text(
-                "Total Saving\n...... TL",
+                "Total Saving\n${ref.watch(userProvider)!.savedMoney.toString()} TL",
                 style: TextStyle(color: Colors.black, fontSize: 25.sp),
               ),
             ),

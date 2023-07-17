@@ -38,6 +38,23 @@ class UserProfileRepository {
     }
   }
 
+  Future<bool> updateUserSavedMoney(double value) async {
+    try {
+      var user = _ref.read(userProvider)!;
+
+      user = _ref.read(userProvider.notifier).update(
+          (state) => user.copyWith(savedMoney: (user.savedMoney + value)))!;
+
+      debugPrint(user.money.toString());
+
+      await _user.update(user.toMap());
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
   Future<bool> updateUserProfile(String name, String email) async {
     try {
       var user = _ref.read(userProvider)!;

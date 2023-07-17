@@ -62,8 +62,9 @@ class MyApp extends StatelessWidget {
         CreateAutomatedActionScreen.routeName: (context) =>
             const CreateAutomatedActionScreen(),
         AutoActionFilterScreen.routeName: (context) => AutoActionFilterScreen(),
-        OnboardingScreen.routeName:(context) => OnboardingScreen(),
-        BadgeScreen.routeName:(context) => BadgeScreen(),
+        OnboardingScreen.routeName: (context) => OnboardingScreen(),
+        BadgeScreen.routeName: (context) => BadgeScreen(),
+        SaveUpScreen.routeName: (context) => SaveUpScreen(),
       },
     );
   }
