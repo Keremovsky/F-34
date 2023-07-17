@@ -1,4 +1,5 @@
 import 'package:bootcamp_flutter/core/providers/firebase_providers.dart';
+import 'package:bootcamp_flutter/features/auth/controller/auth_controller.dart';
 import 'package:bootcamp_flutter/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,12 +13,14 @@ final authRepositoryProvider = Provider((ref) => AuthRepository(
       auth: ref.read(authProvider),
       googleSignIn: ref.read(googleSignInProvider),
       firestore: ref.read(firestoreProvider),
+      ref: ref,
     ));
 
 class AuthRepository {
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
   final FirebaseFirestore _firestore;
+  final Ref _ref;
 
   CollectionReference get _userRef => _firestore.collection("users");
 
@@ -25,9 +28,11 @@ class AuthRepository {
     required FirebaseAuth auth,
     required GoogleSignIn googleSignIn,
     required FirebaseFirestore firestore,
+    required Ref ref,
   })  : _auth = auth,
         _googleSignIn = googleSignIn,
-        _firestore = firestore;
+        _firestore = firestore,
+        _ref = ref;
 
   Future<Either<String, UserModel>> signInWithGoogle() async {
     try {
@@ -51,6 +56,7 @@ class AuthRepository {
           uid: user.user!.uid,
           name: user.user!.displayName!,
           email: user.user!.email!,
+          registerType: "google",
           money: 0,
         );
 
@@ -100,6 +106,7 @@ class AuthRepository {
         uid: user.user!.uid,
         name: name,
         email: email,
+        registerType: "mail",
         money: 0,
       );
 
@@ -123,6 +130,16 @@ class AuthRepository {
       // if it fails
       print(e.toString());
       return false;
+    }
+  }
+
+  void logOut() async {
+    final user = _ref.read(userProvider)!;
+    if (user.registerType == "google") {
+      await _googleSignIn.signOut();
+      await _auth.signOut();
+    } else {
+      await _auth.signOut();
     }
   }
 

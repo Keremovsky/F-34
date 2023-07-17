@@ -217,7 +217,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
       <td>8</td>
       <td>9</td>
    <tr>  
-    <td><img src=" " width="270" height="540"></td>
+    <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/exchange.png" width="270" height="540"></td>
     <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding1.png " width="270" height="540"></td>
     <td><img src="https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%203/onboarding2.png" width="270" height="540"></td>
  </table>
@@ -234,7 +234,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
  <table>
 
 
-- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (borsa, hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
+- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
 
 - **Sprint Review Katılımcıları:** Kerem Okumuş, Meryem Gül Kartal, Semanur Özyılmaz, Kerem Burak Yılmaz, Şevval Bayhan
 
