@@ -134,8 +134,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                         .read(authControllerProvider.notifier)
                         .signInWithMail(email, password, context);
 
-                    Navigator.of(context)
-                            .pushNamed(HomeScreen.routeName);
+                    Navigator.of(context).pushNamed(HomeScreen.routeName);
                   },
                   child: Text(
                     "Log In",
@@ -188,9 +187,6 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                       ref
                           .read(authControllerProvider.notifier)
                           .signInWithGoogle(context);
-
-                      Navigator.of(context)
-                            .pushNamed(HomeScreen.routeName);
                     }, //Google login
                     child: Text(
                       "Log In With Google",
