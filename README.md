@@ -69,7 +69,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
 - **Ürün Durumu:** Ekran Görüntüleri ve Figma UI Tasarımı: [Figma Linki](https://www.figma.com/file/1S1ags5leKAL7j1P1BDTOI/Untitled?type=design&node-id=0%3A1&t=vrMtoVYCaunvU6h1-1).
 
  ![Login Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/login_page.png)
- ![Sign Up Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/sign_up_page.png)
+ ![Sign Up Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%201/sign_up_page.png)
 
 
 - **Sprint Review:** Alınan Kararlar: Onboarding ve diğer ekranların koda geçirilmesi yetiştirilemediği için bir sonraki sprinte aktarılmıştır. Uygulamaya eklenmesi gereken özelliklere karar verilmiş ve 2. sprintte oylanmasına karar verilmiştir.
