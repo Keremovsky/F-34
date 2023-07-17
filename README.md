@@ -234,7 +234,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
  <table>
 
 
-- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (borsa, hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
+- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
 
 - **Sprint Review Katılımcıları:** Kerem Okumuş, Meryem Gül Kartal, Semanur Özyılmaz, Kerem Burak Yılmaz, Şevval Bayhan
 
