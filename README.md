@@ -69,7 +69,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
 - **Ürün Durumu:** Ekran Görüntüleri ve Figma UI Tasarımı: [Figma Linki](https://www.figma.com/file/1S1ags5leKAL7j1P1BDTOI/Untitled?type=design&node-id=0%3A1&t=vrMtoVYCaunvU6h1-1).
 
  ![Login Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/login_page.png)
- ![Sign Up Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/master/Project%20Managment/Sprint%201/sign_up_page.png)
+ ![Sign Up Page](https://github.com/Keremovsky/OUA-Bootcamp-F-34/blob/sevval/Project%20Managment/Sprint%201/sign_up_page.png)
 
 
 - **Sprint Review:** Alınan Kararlar: Onboarding ve diğer ekranların koda geçirilmesi yetiştirilemediği için bir sonraki sprinte aktarılmıştır. Uygulamaya eklenmesi gereken özelliklere karar verilmiş ve 2. sprintte oylanmasına karar verilmiştir.
@@ -234,7 +234,7 @@ Bütçe'm uygulaması ile kullanıcılarımıza gelir ve giderlerini kolayca tak
  <table>
 
 
-- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (borsa, hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
+- **Sprint Review:** Alınan Kararlar:  Sprint sonunda ekip üyelerinin yoğunlukları ve takım içi yanlış zaman yönetimi sonucunda bazı backloglar (hedef ve rozetler) tamamlanamamıştır. Son durumda üründen bu özellikler çıkartılmak durumunda kalınmıştır.
 
 - **Sprint Review Katılımcıları:** Kerem Okumuş, Meryem Gül Kartal, Semanur Özyılmaz, Kerem Burak Yılmaz, Şevval Bayhan
 
