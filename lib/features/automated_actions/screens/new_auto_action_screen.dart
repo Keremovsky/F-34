@@ -4,6 +4,8 @@ import 'package:bootcamp_flutter/themes/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+late String category;
+
 class CreateAutomatedActionScreen extends ConsumerStatefulWidget {
   static const routeName = "/automatedActionsScreen";
 
@@ -21,7 +23,6 @@ class __AutomatedActionsScreenStateState
   String? title;
   double? amount;
   String? action;
-  String? category = "???";
   String? description;
   String? day;
 
@@ -72,7 +73,7 @@ class __AutomatedActionsScreenStateState
                     filled: true,
                   ),
                   onChanged: (value) => setState(() {
-                    amount = double.parse(value);
+                    amount = double.tryParse(value);
                   }),
                 ),
               ),
@@ -206,16 +207,14 @@ class __AutomatedActionsScreenStateState
   }
 }
 
-class expenseOption extends StatefulWidget {
+class expenseOption extends ConsumerStatefulWidget {
   const expenseOption({super.key});
 
   @override
-  State<expenseOption> createState() => _expenceOptionState();
+  ConsumerState<expenseOption> createState() => _expenceOptionState();
 }
 
-class _expenceOptionState extends State<expenseOption> {
-  String? category;
-
+class _expenceOptionState extends ConsumerState<expenseOption> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -232,22 +231,20 @@ class _expenceOptionState extends State<expenseOption> {
         ),
         dropdownColor: Palette.categoryBackground,
         items: Constants.expenseTypeDropItems,
-        onChanged: (value) => category = value as String?,
+        onChanged: (value) => category = value as String,
       ),
     );
   }
 }
 
-class incomeOption extends StatefulWidget {
+class incomeOption extends ConsumerStatefulWidget {
   const incomeOption({super.key});
 
   @override
-  State<incomeOption> createState() => _incomeOptionState();
+  ConsumerState<incomeOption> createState() => _incomeOptionState();
 }
 
-class _incomeOptionState extends State<incomeOption> {
-  String? category;
-
+class _incomeOptionState extends ConsumerState<incomeOption> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -264,7 +261,7 @@ class _incomeOptionState extends State<incomeOption> {
         ),
         dropdownColor: Palette.categoryBackground,
         items: Constants.incomeTypeDropItems,
-        onChanged: (value) => category = value as String?,
+        onChanged: (value) => category = value as String,
       ),
     );
   }
